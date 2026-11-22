@@ -74,6 +74,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; letter-spacing: .02em;
 .article a:not(.btn):hover { color: var(--link-hover); }
 .meta { color: var(--text); margin-bottom: 1rem; }
 .italic { font-style: italic; }
+.sites { font-size: .85rem; color: var(--dim) !important; }
+.sites b { font: 500 .8rem var(--mono); color: var(--link); border: 1px solid var(--hatch); padding: .1rem .5rem; margin-left: .35rem; }
 .note { font-size: .8rem; color: var(--dim) !important; margin-top: .75rem; margin-bottom: 0 !important; }
 .article ol { padding-left: 1.25rem; }
 .article ol li { margin-bottom: .75rem; padding-left: .25rem; }

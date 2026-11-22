@@ -1,13 +1,17 @@
 # Site Themer
 
-Custom themes for websites. Currently supports **WhatsApp Web** with three presets
-(AMOLED Black, Midnight, Graphite), custom sent/received bubble colors, message text size, a privacy blur (hover to reveal), and per-site on/off.
+Custom themes for websites. Currently supports **WhatsApp Web** and **YouTube**.
+
+- Three presets for every site: AMOLED Black, Midnight, Graphite
+- Per-site on/off
+- WhatsApp options: sent/received bubble colors, message text size, privacy blur (hover to reveal)
+- YouTube options: progress bar color, turn off ambient glow, dim thumbnails until hover
 
 ## Install (Chrome, Edge, Brave)
 
 1. Open `chrome://extensions` and enable **Developer mode**.
 2. **Load unpacked** and select this folder.
-3. Open https://web.whatsapp.com, turn on WhatsApp's dark theme (Settings > Chat > Theme > Dark).
+3. Turn on each site's own dark theme (WhatsApp: Settings > Chat > Theme > Dark. YouTube: profile picture > Appearance > Dark theme).
 4. Click the extension icon to pick a theme.
 
 ## Share
@@ -16,13 +20,13 @@ Zip this folder and send it.
 
 ## Layout
 
-- `shared/registry.js` – site list, presets, settings storage
-- `shared/content.js` – applies the chosen preset as CSS variables on the page
+- `shared/registry.js` – site list, per-site options, presets, settings storage
+- `shared/content.js` – applies the chosen preset and options as CSS variables / attributes on the page
 - `sites/<site>.css` – per-site styles, gated by `html[data-st-site="<site>"]`
-- `popup/` – settings UI
+- `popup/` – settings UI, generated from the registry
 
 ## Adding a site
 
-1. Add an entry to `SITES` in `shared/registry.js`.
-2. Create `sites/<id>.css` using the `--st-bg`, `--st-surface`, `--st-border`, `--st-input`, `--st-incoming`, `--st-outgoing` variables.
+1. Add an entry to `SITES` in `shared/registry.js` with its `hosts` and `options` (types: `color`, `select`, `toggle`; see the comment at the top of the file).
+2. Create `sites/<id>.css` using the `--st-bg`, `--st-surface`, `--st-border`, `--st-input`, `--st-incoming`, `--st-outgoing` variables and any option variables or attributes.
 3. Add a `content_scripts` block to `manifest.json` with the site's `matches`, the CSS, and `shared/registry.js` + `shared/content.js`.

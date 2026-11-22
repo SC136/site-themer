@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>site themer</title>
-  <meta name="description" content="a free browser extension that makes whatsapp web actually black.">
+  <meta name="description" content="a free browser extension that makes whatsapp web and youtube actually black.">
   <meta property="og:title" content="site themer">
-  <meta property="og:description" content="true amoled black and more for whatsapp web.">
+  <meta property="og:description" content="true amoled black and more for whatsapp web and youtube.">
   <script>if(localStorage.getItem("theme")==="light")document.documentElement.classList.add("light")</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -33,9 +33,9 @@
       <div>
         <h2>what it does</h2>
         <ul class="list">
-          <li>- gives whatsapp web true <span class="mono accent">#000</span> backgrounds</li>
-          <li>- 3 themes, custom bubble colors</li>
-          <li>- privacy blur, bigger message text</li>
+          <li>- works on whatsapp web and youtube</li>
+          <li>- true <span class="mono accent">#000</span> backgrounds, 3 themes</li>
+          <li>- site options: bubble colors, privacy blur, no ambient glow</li>
         </ul>
       </div>
       <div class="links">
@@ -52,9 +52,10 @@
 
     <article class="article">
       <h1>site themer</h1>
-      <div class="meta">version: <span class="italic">1.1.1</span> &middot; chromium only &middot; free &middot; no tracking</div>
+      <div class="meta">version: <span class="italic">1.2.0</span> &middot; chromium only &middot; free &middot; no tracking</div>
       <hr>
-      <p>whatsapp web's dark mode is grey. mine isn't anymore. this is a small browser extension that turns it into proper amoled black, with a few themes and options so it feels like yours.</p>
+      <p>dark mode on whatsapp web and youtube is grey. mine isn't anymore. this is a small browser extension that turns them into proper amoled black, with a few themes and per-site options so it feels like yours.</p>
+            <p class="sites"><span>supported sites:</span> <b>whatsapp web</b> <b>youtube</b></p>
 
       <section id="download">
         <div class="frame">
@@ -122,9 +123,10 @@
           <li class="step">
             <span class="num">5</span>
             <div class="body">
-              <h3>switch whatsapp to dark mode</h3>
-              <p>open <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a> and go to <strong>settings &rarr; chat &rarr; theme &rarr; dark</strong>. then refresh the page once.</p>
-              <p class="tip">the theme only works on top of whatsapp's own dark mode.</p>
+              <h3>switch the site to dark mode</h3>
+              <p><strong>whatsapp:</strong> open <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a> and go to <strong>settings &rarr; chat &rarr; theme &rarr; dark</strong>.</p>
+              <p><strong>youtube:</strong> open <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">youtube.com</a>, click your profile picture, then <strong>appearance &rarr; dark theme</strong>.</p>
+              <p class="tip">the themes only work on top of each site's own dark mode. refresh the page once afterwards.</p>
             </div>
           </li>
 
@@ -142,6 +144,7 @@
 
       <section id="themes">
         <h2>pick your look</h2>
+                <p class="note" style="margin-bottom:1rem !important">the themes below are shown on a whatsapp mockup. youtube uses the same colors.</p>
         <div class="tabs" id="tabs"></div>
         <div class="preview" id="preview">
           <div class="side">
@@ -166,7 +169,7 @@
         <h2>faq</h2>
         <div class="entry">
           <h3>nothing changed after installing</h3>
-          <p>reload the whatsapp tab and make sure whatsapp's own theme is set to dark.</p>
+          <p>reload the whatsapp or youtube tab and make sure the site's own theme is set to dark.</p>
         </div>
         <hr>
         <div class="entry">
@@ -175,8 +178,8 @@
         </div>
         <hr>
         <div class="entry">
-          <h3>some parts turned grey after a whatsapp update</h3>
-          <p>whatsapp changes its page often. <a href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a> and i'll update the theme.</p>
+          <h3>some parts turned grey after a site update</h3>
+          <p>whatsapp and youtube change their pages often. <a href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a> and i'll update the theme.</p>
         </div>
         <hr>
         <div class="entry">
@@ -197,7 +200,7 @@
       <a class="btn" href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a>
     </div>
 
-    <p class="foot">not affiliated with whatsapp or meta. site themer only changes colors in your own browser.</p>
+    <p class="foot">not affiliated with whatsapp, meta, youtube or google. site themer only changes colors in your own browser.</p>
   </main>
   <script src="script.js"></script>
 </body>

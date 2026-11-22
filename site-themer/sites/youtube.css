@@ -1,0 +1,46 @@
+/* YouTube theme. Active only when Site Themer sets data-st-site="youtube"
+ * and YouTube itself is in dark mode (html[dark]).
+ * Colors come from --st-* variables set by shared/content.js. */
+
+html[data-st-site="youtube"][dark],
+html[data-st-site="youtube"] [dark] {
+    --yt-spec-base-background: var(--st-bg) !important;
+    --yt-spec-raised-background: var(--st-surface) !important;
+    --yt-spec-menu-background: var(--st-input) !important;
+    --yt-spec-general-background-a: var(--st-bg) !important;
+    --yt-spec-general-background-b: var(--st-bg) !important;
+    --yt-spec-general-background-c: var(--st-bg) !important;
+    --yt-spec-brand-background-solid: var(--st-bg) !important;
+    --yt-spec-brand-background-primary: var(--st-bg) !important;
+    --yt-spec-outline-opaque: var(--st-border) !important;
+}
+
+html[data-st-site="youtube"][dark],
+html[data-st-site="youtube"][dark] body,
+html[data-st-site="youtube"][dark] ytd-app,
+html[data-st-site="youtube"][dark] ytd-masthead #background {
+    background-color: var(--st-bg) !important;
+}
+
+/* Progress bar + scrubber accent (only when a custom color is picked) */
+html[data-st-site="youtube"][style*="--st-accent"] .ytp-play-progress,
+html[data-st-site="youtube"][style*="--st-accent"] .ytp-swatch-background-color {
+    background: var(--st-accent) !important;
+}
+
+/* Ambient glow behind the player */
+html[data-st-site="youtube"][data-st-no-glow] #cinematics,
+html[data-st-site="youtube"][data-st-no-glow] #cinematics-container {
+    display: none !important;
+}
+
+/* Dim thumbnails until hovered */
+html[data-st-site="youtube"][data-st-dim] ytd-thumbnail img,
+html[data-st-site="youtube"][data-st-dim] yt-thumbnail-view-model img {
+    opacity: .55;
+    transition: opacity .2s ease;
+}
+html[data-st-site="youtube"][data-st-dim] ytd-thumbnail:hover img,
+html[data-st-site="youtube"][data-st-dim] yt-thumbnail-view-model:hover img {
+    opacity: 1;
+}
