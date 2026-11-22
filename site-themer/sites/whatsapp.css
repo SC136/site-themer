@@ -52,6 +52,26 @@ html[data-st-site="whatsapp"] body.dark [aria-selected="true"] > div {
     background-color: var(--st-surface) !important;
 }
 
+/* Message text size (set when the user picks Large / XL) */
+html[data-st-site="whatsapp"][style*="--st-font"] body.dark #main .selectable-text {
+    font-size: var(--st-font) !important;
+}
+
+/* Privacy blur: hidden until hovered */
+html[data-st-site="whatsapp"][data-st-blur] body.dark #pane-side [role="listitem"],
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main .message-in,
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main .message-out,
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main header {
+    filter: blur(6px);
+    transition: filter .15s;
+}
+html[data-st-site="whatsapp"][data-st-blur] body.dark #pane-side [role="listitem"]:hover,
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main .message-in:hover,
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main .message-out:hover,
+html[data-st-site="whatsapp"][data-st-blur] body.dark #main header:hover {
+    filter: none;
+}
+
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar { width: 8px; height: 8px; }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-track { background: var(--st-bg); }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb { background: var(--st-border); border-radius: 10px; }

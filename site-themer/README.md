@@ -1,7 +1,7 @@
 # Site Themer
 
 Custom themes for websites. Currently supports **WhatsApp Web** with three presets
-(AMOLED Black, Midnight, Graphite), a custom sent-bubble color, and per-site on/off.
+(AMOLED Black, Midnight, Graphite), custom sent/received bubble colors, message text size, a privacy blur (hover to reveal), and per-site on/off.
 
 ## Install (Chrome, Edge, Brave)
 

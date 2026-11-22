@@ -13,7 +13,7 @@
     whatsapp: { name: "WhatsApp Web", hosts: ["web.whatsapp.com"] }
   };
 
-  const DEFAULT_SITE_SETTINGS = { enabled: true, preset: "amoled", outgoing: null };
+  const DEFAULT_SITE_SETTINGS = { enabled: true, preset: "amoled", outgoing: null, incoming: null, blur: false, fontSize: "" };
 
   function siteForHost(host) {
     for (const id in SITES) if (SITES[id].hosts.includes(host)) return id;

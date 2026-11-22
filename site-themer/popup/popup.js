@@ -25,16 +25,30 @@ async function render() {
 
     const select = el("select");
     for (const key in PRESETS) select.append(el("option", { value: key, textContent: PRESETS[key].name, selected: key === s.preset }));
-    select.onchange = () => update({ preset: select.value, outgoing: null });
+    select.onchange = () => update({ preset: select.value, outgoing: null, incoming: null });
 
     const color = el("input", { type: "color", value: s.outgoing || preset.outgoing });
     color.onchange = () => update({ outgoing: color.value });
     const reset = el("button", { textContent: "Reset" });
     reset.onclick = () => update({ outgoing: null });
 
+    const inColor = el("input", { type: "color", value: s.incoming || preset.incoming });
+    inColor.onchange = () => update({ incoming: inColor.value });
+    const inReset = el("button", { textContent: "Reset" });
+    inReset.onclick = () => update({ incoming: null });
+
+    const font = el("select");
+    for (const [v, label] of [["", "Default"], ["16", "Large"], ["18", "XL"]]) {
+      font.append(el("option", { value: v, textContent: label, selected: v === s.fontSize }));
+    }
+    font.onchange = () => update({ fontSize: font.value });
+
+    const blur = el("input", { type: "checkbox", checked: s.blur });
+    blur.onchange = () => update({ blur: blur.checked });
+
     const swatches = el("div", { className: "swatches" });
     for (const k of ["bg", "surface", "border", "incoming", "outgoing"]) {
-      swatches.append(el("span", { style: `background:${k === "outgoing" && s.outgoing ? s.outgoing : preset[k]}` }));
+      swatches.append(el("span", { style: `background:${s[k] && (k === "outgoing" || k === "incoming") ? s[k] : preset[k]}` }));
     }
 
     container.append(
@@ -42,6 +56,9 @@ async function render() {
         el("div", { className: "row" }, el("span", { className: "title", textContent: SITES[id].name }), toggle),
         el("div", { className: "row" }, "Theme", select),
         el("div", { className: "row" }, "Sent bubble", el("span", {}, color, " ", reset)),
+        el("div", { className: "row" }, "Received bubble", el("span", {}, inColor, " ", inReset)),
+        el("div", { className: "row" }, "Message text size", font),
+        el("div", { className: "row" }, "Privacy blur (hover to reveal)", blur),
         swatches
       )
     );
