@@ -129,6 +129,15 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; letter-spacing: .02em;
 .btn.ghost:hover { color: var(--link); opacity: 1; }
 @media (max-width: 480px) { .article ol.steps li.step { flex-direction: column; gap: .75rem; padding: 1rem; } }
 
+.article .started { font-size: .9rem; color: var(--link); border: 1px solid var(--hatch); padding: .6rem .9rem; margin-bottom: 1rem; }
+#install.flash .step { animation: pulse 1.6s ease-out; }
+#install.flash .step:nth-child(2) { animation-delay: .1s; }
+#install.flash .step:nth-child(3) { animation-delay: .2s; }
+#install.flash .step:nth-child(4) { animation-delay: .3s; }
+#install.flash .step:nth-child(5) { animation-delay: .4s; }
+#install.flash .step:nth-child(6) { animation-delay: .5s; }
+@keyframes pulse { 0% { border-color: var(--link); box-shadow: 0 0 0 3px rgb(56 189 248 / .25); } 100% { border-color: var(--border); box-shadow: 0 0 0 0 transparent; } }
+
 /* theme preview */
 .tabs { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .tabs button { font: .8rem var(--mono); background: transparent; color: var(--muted); border: 1px solid var(--border); padding: .35rem .8rem; cursor: pointer; transition: color .15s, border-color .15s; }

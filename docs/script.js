@@ -60,6 +60,21 @@ copyBtn.onclick = async () => {
   setTimeout(() => (copyBtn.textContent = "copy"), 1800);
 };
 
+// after a download starts, guide the user to the install steps
+document.querySelectorAll("a[download]").forEach((a) => {
+  a.addEventListener("click", () => {
+    const install = document.getElementById("install");
+    const note = document.getElementById("started");
+    if (note) note.hidden = false;
+    setTimeout(() => {
+      install.scrollIntoView({ behavior: "smooth", block: "start" });
+      install.classList.remove("flash");
+      void install.offsetWidth;
+      install.classList.add("flash");
+    }, 400);
+  });
+});
+
 // light / dark toggle with circular reveal from the button
 const toggle = document.getElementById("theme");
 toggle.onclick = () => {
