@@ -1,0 +1,58 @@
+/* WhatsApp Web theme. Active only when Site Themer sets data-st-site="whatsapp"
+ * and WhatsApp itself is in dark mode. Colors come from --st-* variables. */
+
+html[data-st-site="whatsapp"] body.dark {
+    color-scheme: dark !important;
+    background: var(--st-bg) !important;
+
+    --WDS-background-wash-plain: var(--st-bg) !important;
+    --WDS-background-wash-plain-RGB: 0, 0, 0 !important;
+    --WDS-background-wash-inset: var(--st-bg) !important;
+    --WDS-background-wash-inset-RGB: 0, 0, 0 !important;
+    --WDS-background-elevated-wash-inset: var(--st-bg) !important;
+    --WDS-surface-default: var(--st-bg) !important;
+    --WDS-surface-emphasized: var(--st-bg) !important;
+    --WDS-surface-highlight: var(--st-surface) !important;
+    --WDS-surface-elevated-default: var(--st-bg) !important;
+    --WDS-surface-elevated-emphasized: var(--st-surface) !important;
+    --WDS-systems-chat-background-wallpaper: var(--st-bg) !important;
+    --WDS-systems-chat-surface-composer: var(--st-bg) !important;
+    --WDS-systems-chat-surface-tray: var(--st-bg) !important;
+
+    /* Legacy variables */
+    --background-default: var(--st-bg) !important;
+    --search-container-background: var(--st-bg) !important;
+    --drawer-background-deep: var(--st-bg) !important;
+    --panel-background-deeper: var(--st-bg) !important;
+    --compose-input-background: var(--st-input) !important;
+    --compose-input-border: var(--st-border) !important;
+    --conversation-header-border: var(--st-border) !important;
+    --conversation-panel-border: var(--st-border) !important;
+    --dropdown-background: var(--st-bg) !important;
+    --intro-background: var(--st-bg) !important;
+    --reactions-panel-background-color: var(--st-bg) !important;
+    --system-message-background: var(--st-bg) !important;
+    --incoming-background: var(--st-incoming) !important;
+    --outgoing-background: var(--st-outgoing) !important;
+}
+
+html[data-st-site="whatsapp"] body.dark #app,
+html[data-st-site="whatsapp"] body.dark #side,
+html[data-st-site="whatsapp"] body.dark #pane-side,
+html[data-st-site="whatsapp"] body.dark #main,
+html[data-st-site="whatsapp"] body.dark #main header,
+html[data-st-site="whatsapp"] body.dark #main footer,
+html[data-st-site="whatsapp"] body.dark [role="dialog"],
+html[data-st-site="whatsapp"] body.dark [role="menu"],
+html[data-st-site="whatsapp"] body.dark [role="listbox"] {
+    background-color: var(--st-bg) !important;
+}
+
+html[data-st-site="whatsapp"] body.dark [aria-selected="true"] > div {
+    background-color: var(--st-surface) !important;
+}
+
+html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar { width: 8px; height: 8px; }
+html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-track { background: var(--st-bg); }
+html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb { background: var(--st-border); border-radius: 10px; }
+html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb:hover { background: #303030; }

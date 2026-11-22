@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Themer – true black themes for WhatsApp Web</title>
+  <meta name="description" content="A free browser extension that gives WhatsApp Web true AMOLED black and other dark themes.">
+  <meta property="og:title" content="Site Themer">
+  <meta property="og:description" content="True AMOLED black and more for WhatsApp Web.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <span class="logo"><i></i>Site Themer</span>
+    <div>
+      <a href="#themes">Themes</a></i>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/SC136/site-themer">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="pill">Free &middot; Open source &middot; No tracking</span>
+    <h1>WhatsApp Web,<br><span class="grad">actually black.</span></h1>
+    <p class="lead">True AMOLED black and hand-picked dark themes for WhatsApp Web. One click to switch, installs in a minute.</p>
+    <div class="cta">
+      <a class="btn" href="downloads/site-themer.zip" download>Download for Chrome / Edge / Brave</a>
+      <a class="btn ghost" href="#install">How to install</a>
+    </div>
+    <p class="small">Version 1.0.0 &middot; Chromium browsers only</p>
+  </header>
+
+  <section id="features" class="grid">
+    <div class="card"><h3>Pure black</h3><p>Real #000 backgrounds that switch off OLED pixels and save battery.</p></div>
+    <div class="card"><h3>3 themes</h3><p>AMOLED Black, Midnight and Graphite, plus a custom sent-bubble color.</p></div>
+    <div class="card"><h3>Private</h3><p>Only changes colors in your browser. It doesn't read or send your messages.</p></div>
+  </section>
+
+  <section id="themes">
+    <h2>Pick your look</h2>
+    <div class="tabs" id="tabs"></div>
+    <div class="preview" id="preview">
+      <div class="side">
+        <div class="chat selected">Alex<small>See you at 8</small></div>
+        <div class="chat">Family<small>Photos attached</small></div>
+        <div class="chat">Work<small>Meeting moved</small></div>
+      </div>
+      <div class="main">
+        <div class="bar">Alex</div>
+        <div class="msgs">
+          <div class="bubble in">Are we still on for tonight?</div>
+          <div class="bubble out">Yes! See you at 8.</div>
+          <div class="bubble in">Perfect.</div>
+        </div>
+        <div class="input">Type a message</div>
+      </div>
+    </div>
+    <p class="small">Preview is an approximation of the real thing.</p>
+  </section>
+
+  <section id="install">
+    <h2>Install in 6 steps</h2>
+    <p class="muted">It isn't in a web store yet, so you load it manually. It takes about a minute.</p>
+    <ol class="steps">
+      <li><div><strong>Download and unzip.</strong> Click the download button, then right-click the zip and choose <em>Extract All</em> (Mac: double-click). Keep the <code>site-themer</code> folder somewhere permanent. Deleting it removes the extension.</div></li>
+      <li><div><strong>Open the extensions page.</strong> Type <code>chrome://extensions</code> in the address bar (<code>edge://extensions</code> for Edge, <code>brave://extensions</code> for Brave).</div></li>
+      <li><div><strong>Turn on Developer mode.</strong> It's a toggle in the top-right corner (left sidebar in Edge).</div></li>
+      <li><div><strong>Click "Load unpacked"</strong> and select the <code>site-themer</code> folder, the one that contains <code>manifest.json</code>.</div></li>
+      <li><div><strong>Turn on WhatsApp's dark mode.</strong> On <a href="https://web.whatsapp.com">web.whatsapp.com</a> go to Settings &rarr; Chat &rarr; Theme &rarr; Dark.</div></li>
+      <li><div><strong>Choose a theme.</strong> Click the puzzle-piece icon, pin Site Themer, and open it to pick a theme.</div></li>
+    </ol>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details><summary>Nothing changed after installing</summary><p>Reload the WhatsApp tab and make sure WhatsApp's own theme is set to Dark.</p></details>
+    <details><summary>"Manifest file is missing or unreadable"</summary><p>You picked the wrong folder. Select the one that directly contains <code>manifest.json</code>.</p></details>
+    <details><summary>Some parts are grey after a WhatsApp update</summary><p>WhatsApp changes its page often. <a href="https://github.com/SC136/site-themer/issues">Open an issue</a> and I'll update the theme.</p></details>
+    <details><summary>Is it safe?</summary><p>The code is open source on GitHub and is only CSS plus a small settings popup. It asks for storage permission only, to remember your theme.</p></details>
+    <details><summary>Firefox or Safari?</summary><p>Not supported yet.</p></details>
+  </section>
+
+  <footer>Not affiliated with WhatsApp or Meta. &middot; <a href="https://github.com/SC136/site-themer">Source on GitHub</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

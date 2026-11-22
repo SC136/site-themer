@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Site Themer",
+  "version": "1.0.0",
+  "description": "Custom themes for your favorite sites. Currently: WhatsApp Web (AMOLED black and more).",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Site Themer",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "css": ["sites/whatsapp.css"],
+      "js": ["shared/registry.js", "shared/content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
