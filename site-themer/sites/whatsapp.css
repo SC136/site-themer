@@ -90,3 +90,101 @@ html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar { width: 8px; height
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-track { background: var(--st-bg); }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb { background: var(--st-border); border-radius: 10px; }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb:hover { background: #303030; }
+
+/* ===== Liquid Glass preset =====
+ * Translucent frosted panels over a soft colored glow. Needs Chrome 111+
+ * (color-mix, backdrop-filter). */
+html[data-st-site="whatsapp"][data-st-glass] {
+    background:
+        radial-gradient(60vmax 60vmax at 8% 0%, rgb(10 132 255 / .38), transparent 60%),
+        radial-gradient(50vmax 50vmax at 100% 18%, rgb(191 90 242 / .32), transparent 60%),
+        radial-gradient(60vmax 60vmax at 40% 105%, rgb(48 209 88 / .20), transparent 60%),
+        var(--st-bg) fixed !important;
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark {
+    --glass: color-mix(in srgb, var(--st-surface) 42%, transparent);
+    --glass-strong: color-mix(in srgb, var(--st-surface) 68%, transparent);
+    --glass-line: rgb(255 255 255 / .14);
+    --glass-blur: blur(28px) saturate(180%);
+
+    background: transparent !important;
+
+    --WDS-background-wash-plain: transparent !important;
+    --WDS-background-wash-inset: transparent !important;
+    --WDS-background-elevated-wash-inset: transparent !important;
+    --WDS-surface-default: transparent !important;
+    --WDS-surface-emphasized: var(--glass) !important;
+    --WDS-surface-highlight: var(--glass-strong) !important;
+    --WDS-surface-elevated-default: var(--glass) !important;
+    --WDS-surface-elevated-emphasized: var(--glass-strong) !important;
+    --WDS-systems-chat-background-wallpaper: transparent !important;
+    --WDS-systems-chat-surface-composer: var(--glass-strong) !important;
+    --WDS-systems-chat-surface-tray: var(--glass-strong) !important;
+    --background-default: transparent !important;
+    --search-container-background: var(--glass) !important;
+    --drawer-background-deep: transparent !important;
+    --panel-background-deeper: transparent !important;
+    --compose-input-background: var(--glass-strong) !important;
+    --compose-input-border: var(--glass-line) !important;
+    --conversation-header-border: var(--glass-line) !important;
+    --conversation-panel-border: var(--glass-line) !important;
+    --dropdown-background: var(--glass-strong) !important;
+    --intro-background: transparent !important;
+}
+
+/* Translucent bubbles (descendant rule beats the solid one above) */
+html[data-st-site="whatsapp"][data-st-glass] body.dark * {
+    --WDS-systems-bubble-surface-outgoing: color-mix(in srgb, var(--st-outgoing) 72%, transparent) !important;
+    --WDS-systems-bubble-surface-incoming: color-mix(in srgb, var(--st-incoming) 55%, transparent) !important;
+    --outgoing-background: color-mix(in srgb, var(--st-outgoing) 72%, transparent) !important;
+    --incoming-background: color-mix(in srgb, var(--st-incoming) 55%, transparent) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark #app {
+    background: transparent !important;
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark #side,
+html[data-st-site="whatsapp"][data-st-glass] body.dark #main {
+    background-color: var(--glass) !important;
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark #pane-side {
+    background-color: transparent !important;
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark #main header,
+html[data-st-site="whatsapp"][data-st-glass] body.dark #main footer {
+    background-color: var(--glass-strong) !important;
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .10);
+}
+
+/* Popups, menus and dialogs */
+html[data-st-site="whatsapp"][data-st-glass] body.dark [role="dialog"],
+html[data-st-site="whatsapp"][data-st-glass] body.dark [role="menu"],
+html[data-st-site="whatsapp"][data-st-glass] body.dark [role="listbox"],
+html[data-st-site="whatsapp"][data-st-glass] body.dark [data-animate-modal-popup="true"] {
+    background-color: var(--glass-strong) !important;
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-line);
+    border-radius: 18px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .16), 0 12px 40px rgb(0 0 0 / .45);
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark [aria-selected="true"] > div {
+    background-color: rgb(255 255 255 / .09) !important;
+    border-radius: 14px;
+}
+
+html[data-st-site="whatsapp"][data-st-glass] body.dark ::-webkit-scrollbar-track {
+    background: transparent;
+}
+html[data-st-site="whatsapp"][data-st-glass] body.dark ::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / .22);
+}

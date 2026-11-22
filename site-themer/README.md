@@ -2,7 +2,7 @@
 
 Custom themes for websites. Currently supports **WhatsApp Web** and **YouTube**.
 
-- Four presets for every site: AMOLED Black, Midnight, Graphite, Apple (iOS-style grays with iMessage blue)
+- Five presets for every site: AMOLED Black, Midnight, Graphite, Apple (iOS-style grays with iMessage blue) and Liquid Glass (translucent frosted panels, blur and a soft colored glow; needs Chrome 111+)
 - Per-site on/off
 - WhatsApp options: sent/received bubble colors, message text size, privacy blur (hover to reveal)
 - YouTube options: progress bar color, turn off ambient glow, dim thumbnails until hover
