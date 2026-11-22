@@ -16,7 +16,6 @@
     root.style.removeProperty("--st-incoming-rgb");
     root.style.removeProperty("--st-outgoing-rgb");
     root.removeAttribute("data-st-site");
-    root.removeAttribute("data-st-glass");
     VARS.forEach((v) => root.style.removeProperty("--st-" + v));
     for (const o of site.options) {
       if (o.attr) root.removeAttribute(o.attr);
@@ -47,7 +46,6 @@
     root.style.setProperty("--st-incoming-rgb", rgb(p.incoming));
     root.style.setProperty("--st-outgoing-rgb", rgb(p.outgoing));
     for (const k in extra) root.style.setProperty("--st-" + k, extra[k]);
-    if (p.glass) root.setAttribute("data-st-glass", "1");
     root.setAttribute("data-st-site", siteId);
   }
 
