@@ -42,7 +42,7 @@
         <h2>links</h2>
         <ul class="list">
           <li><a href="#download">download</a></li>
-          <li><a href="#install">install</a></li>
+          <li><a href="#install" class="hl">how to install</a></li>
           <li><a href="#themes">themes</a></li>
           <li><a href="#faq">faq</a></li>
           <li><a href="https://github.com/SC136/site-themer" target="_blank" rel="noopener noreferrer">github</a></li>
@@ -59,14 +59,83 @@
       <section id="download">
         <div class="frame">
           <div class="frame-content">
-            <p>tldr; click the button, unzip it, load it in your browser. it takes about a minute and there's nothing to sign up for.</p>
-            <p><a class="btn" href="downloads/site-themer.zip" download>download for chrome / edge / brave</a></p>
+            <p>tldr; download it, unzip it, then follow the 6 install steps below. it takes about a minute and there's nothing to sign up for.</p>
+            <p class="cta"><a class="btn" href="downloads/site-themer.zip" download>download for chrome / edge / brave</a> <a class="btn ghost" href="#install">how to install &darr;</a></p>
           </div>
           <div class="gutter left"></div>
           <div class="gutter right"></div>
           <div class="rule top"></div>
           <div class="rule bottom"></div>
         </div>
+      </section>
+
+      <section id="install">
+        <div class="install-head">
+          <span class="badge">takes about 1 minute</span>
+          <h2>how to install</h2>
+          <p>it isn't in a web store yet, so you add it by hand. it's safe, and you only do this once. follow the 6 steps below in order.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="num">1</span>
+            <div class="body">
+              <h3>download and unzip</h3>
+              <p>click <a href="downloads/site-themer.zip" download>download</a>. then unzip the file: right-click it and choose <strong>extract all</strong> (on mac, double-click it).</p>
+              <p class="tip"><b>important:</b> keep the unzipped <code>site-themer</code> folder somewhere permanent, like documents. if you delete it, the extension stops working.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <span class="num">2</span>
+            <div class="body">
+              <h3>open your browser's extensions page</h3>
+              <p>pick your browser, then copy the address and paste it into a new tab.</p>
+              <div class="browsers" id="browsers"></div>
+              <div class="copybox">
+                <code id="ext-url">chrome://extensions</code>
+                <button type="button" id="copy-url">copy</button>
+              </div>
+              <p class="tip">websites can't open this page for you, so it has to be pasted into the address bar.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <span class="num">3</span>
+            <div class="body">
+              <h3>turn on developer mode</h3>
+              <p>find the <strong>developer mode</strong> switch and turn it on. it's in the <strong>top-right corner</strong> (in edge it's in the <strong>left sidebar</strong>). three new buttons appear.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <span class="num">4</span>
+            <div class="body">
+              <h3>click "load unpacked"</h3>
+              <p>click <strong>load unpacked</strong>, then pick the <code>site-themer</code> folder you unzipped in step 1.</p>
+              <p class="tip">pick the folder that directly contains <code>manifest.json</code>. if you see "manifest file is missing", you're one folder too high or too low.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <span class="num">5</span>
+            <div class="body">
+              <h3>switch whatsapp to dark mode</h3>
+              <p>open <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a> and go to <strong>settings &rarr; chat &rarr; theme &rarr; dark</strong>. then refresh the page once.</p>
+              <p class="tip">the theme only works on top of whatsapp's own dark mode.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <span class="num">6</span>
+            <div class="body">
+              <h3>pick your theme</h3>
+              <p>click the <strong>puzzle-piece icon</strong> in your browser toolbar, pin <strong>site themer</strong>, then click it to choose a theme. changes show up right away.</p>
+            </div>
+          </li>
+        </ol>
+
+        <p class="done"><strong>that's it.</strong> if something doesn't look right, check the <a href="#faq">faq</a>.</p>
       </section>
 
       <section id="themes">
@@ -91,20 +160,7 @@
         <p class="note">this preview is an approximation of the real thing.</p>
       </section>
 
-      <section id="install">
-        <h2>how to install</h2>
-        <p>it isn't in a web store yet, so you load it manually. safe, and takes about a minute.</p>
-        <ol></ol>
-          <li><strong>download and unzip.</strong> right-click the zip and choose <em>extract all</em> (mac: double-click). keep the <code>site-themer</code> folder somewhere permanent. deleting it removes the extension.</li>
-          <li><strong>open the extensions page.</strong> type <code>chrome://extensions</code> in the address bar (<code>edge://extensions</code> for edge, <code>brave://extensions</code> for brave).</li>
-          <li><strong>turn on developer mode.</strong> it's a toggle in the top-right corner (left sidebar in edge).</li>
-          <li><strong>click "load unpacked"</strong> and select the <code>site-themer</code> folder, the one that contains <code>manifest.json</code>.</li>
-          <li><strong>turn on whatsapp's dark mode.</strong> on <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a> go to settings &rarr; chat &rarr; theme &rarr; dark.</li>
-          <li><strong>choose a theme.</strong> click the puzzle-piece icon, pin site themer, and open it to pick a theme.</li>
-        </ol>
-      </section>
-
-      <section id="faq">
+<section id="faq">
         <h2>faq</h2>
         <div class="entry">
           <h3>nothing changed after installing</h3>

@@ -25,6 +25,41 @@ for (const key in PRESETS) {
 }
 select("amoled");
 
+// browser picker + copy button for the extensions page address
+const BROWSERS = { chrome: "chrome://extensions", edge: "edge://extensions", brave: "brave://extensions" };
+const urlEl = document.getElementById("ext-url");
+const picker = document.getElementById("browsers");
+const copyBtn = document.getElementById("copy-url");
+
+function pickBrowser(key) {
+  urlEl.textContent = BROWSERS[key];
+  picker.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.key === key));
+}
+for (const key in BROWSERS) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = key;
+  b.dataset.key = key;
+  b.onclick = () => pickBrowser(key);
+  picker.append(b);
+}
+const ua = navigator.userAgent;
+pickBrowser(ua.includes("Edg/") ? "edge" : navigator.brave ? "brave" : "chrome");
+
+copyBtn.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(urlEl.textContent);
+    copyBtn.textContent = "copied!";
+  } catch {
+    const r = document.createRange();
+    r.selectNodeContents(urlEl);
+    getSelection().removeAllRanges();
+    getSelection().addRange(r);
+    copyBtn.textContent = "press ctrl+c";
+  }
+  setTimeout(() => (copyBtn.textContent = "copy"), 1800);
+};
+
 // light / dark toggle with circular reveal from the button
 const toggle = document.getElementById("theme");
 toggle.onclick = () => {
