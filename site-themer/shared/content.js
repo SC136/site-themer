@@ -7,7 +7,14 @@
   const root = document.documentElement;
   const VARS = ["bg", "surface", "border", "input", "incoming", "outgoing"];
 
+  function rgb(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(", ");
+  }
+
   function clear() {
+    root.style.removeProperty("--st-incoming-rgb");
+    root.style.removeProperty("--st-outgoing-rgb");
     root.removeAttribute("data-st-site");
     VARS.forEach((v) => root.style.removeProperty("--st-" + v));
     for (const o of site.options) {
@@ -36,6 +43,8 @@
     }
 
     VARS.forEach((v) => root.style.setProperty("--st-" + v, p[v]));
+    root.style.setProperty("--st-incoming-rgb", rgb(p.incoming));
+    root.style.setProperty("--st-outgoing-rgb", rgb(p.outgoing));
     for (const k in extra) root.style.setProperty("--st-" + k, extra[k]);
     root.setAttribute("data-st-site", siteId);
   }

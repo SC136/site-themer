@@ -36,6 +36,20 @@ html[data-st-site="whatsapp"] body.dark {
     --outgoing-background: var(--st-outgoing) !important;
 }
 
+/* Message bubbles. WhatsApp redefines its variables on nested wrappers, so
+ * these are set on every descendant to win over them. */
+html[data-st-site="whatsapp"] body.dark,
+html[data-st-site="whatsapp"] body.dark * {
+    --WDS-systems-bubble-surface-outgoing: var(--st-outgoing) !important;
+    --WDS-systems-bubble-surface-outgoing-RGB: var(--st-outgoing-rgb) !important;
+    --WDS-systems-bubble-surface-outgoing-rgb: var(--st-outgoing-rgb) !important;
+    --WDS-systems-bubble-surface-incoming: var(--st-incoming) !important;
+    --WDS-systems-bubble-surface-incoming-RGB: var(--st-incoming-rgb) !important;
+    --WDS-systems-bubble-surface-incoming-rgb: var(--st-incoming-rgb) !important;
+    --outgoing-background: var(--st-outgoing) !important;
+    --incoming-background: var(--st-incoming) !important;
+}
+
 html[data-st-site="whatsapp"] body.dark #app,
 html[data-st-site="whatsapp"] body.dark #side,
 html[data-st-site="whatsapp"] body.dark #pane-side,
