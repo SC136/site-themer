@@ -46,7 +46,14 @@ for (const key in BROWSERS) {
 const ua = navigator.userAgent;
 pickBrowser(ua.includes("Edg/") ? "edge" : navigator.brave ? "brave" : "chrome");
 
+// show cmd instead of ctrl on mac
+if (/Mac|iPhone|iPad/.test(navigator.platform)) {
+  document.querySelectorAll(".k-new").forEach((k) => (k.textContent = "cmd"));
+}
+const keys = document.getElementById("keys");
+
 copyBtn.onclick = async () => {
+  keys.classList.add("on");
   try {
     await navigator.clipboard.writeText(urlEl.textContent);
     copyBtn.textContent = "copied!";
