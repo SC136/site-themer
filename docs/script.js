@@ -2,8 +2,7 @@
 const PRESETS = {
   amoled:   { name: "amoled black", bg: "#000000", surface: "#080808", border: "#141414", input: "#0b0b0b", incoming: "#0f0f0f", outgoing: "#0b3d2e" },
   midnight: { name: "midnight",     bg: "#05070d", surface: "#0c111c", border: "#1a2233", input: "#0f1522", incoming: "#121a2a", outgoing: "#1f3b6e" },
-  graphite: { name: "graphite",     bg: "#0e0e10", surface: "#17171a", border: "#26262b", input: "#1c1c20", incoming: "#222226", outgoing: "#2f4f4a" },
-  apple:    { name: "apple",        bg: "#000000", surface: "#1c1c1e", border: "#38383a", input: "#1c1c1e", incoming: "#26252a", outgoing: "#0a84ff" }
+  graphite: { name: "graphite",     bg: "#0e0e10", surface: "#17171a", border: "#26262b", input: "#1c1c20", incoming: "#222226", outgoing: "#2f4f4a" }
 };
 
 const tabs = document.getElementById("tabs");
