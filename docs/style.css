@@ -129,6 +129,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; letter-spacing: .02em;
 .blur-top { top: 0; background: linear-gradient(to top, transparent, var(--blur-bg)); -webkit-mask-image: linear-gradient(to bottom, var(--blur-bg) 50%, transparent); mask-image: linear-gradient(to bottom, var(--blur-bg) 50%, transparent); }
 .blur-bottom { bottom: 0; background: linear-gradient(to bottom, transparent, var(--blur-bg)); -webkit-mask-image: linear-gradient(to top, var(--blur-bg) 50%, transparent); mask-image: linear-gradient(to top, var(--blur-bg) 50%, transparent); }
 
+/* brand */
+.brand { position: fixed; top: 1rem; left: 1rem; z-index: 30; display: flex; align-items: center; gap: .6rem; font-family: var(--serif); font-weight: 800; letter-spacing: .02em; color: var(--fg); }
+.brand img { display: block; border: 1px solid var(--border); border-radius: 8px; }
+@media (max-width: 480px) { .brand span { display: none; } }
+.page { padding-top: 5rem; }
+
 /* theme toggle */
 #theme { position: fixed; top: 1rem; right: 1rem; z-index: 30; width: 36px; height: 36px; display: grid; place-items: center; background: transparent; color: var(--muted); border: 1px solid var(--border); cursor: pointer; transition: color .15s; }
 #theme:hover { color: var(--link); }
