@@ -23,8 +23,14 @@ function selectPreset(key) {
   for (const v of ["bg", "surface", "border", "input", "incoming", "outgoing"]) {
     preview.style.setProperty("--p-" + v, p[v]);
   }
-  tabs.querySelectorAll("button").forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.key === key));
+  tabs.querySelectorAll("button").forEach((button, index) => {
+    const selected = button.dataset.key === key;
+    button.setAttribute("aria-pressed", String(selected));
+    if (selected) {
+      tabs.style.setProperty("--preset-index", index);
+      tabs.style.setProperty("--preset-column", index % 2);
+      tabs.style.setProperty("--preset-row", Math.floor(index / 2));
+    }
   });
 }
 
@@ -37,7 +43,19 @@ for (const key of ["system24", "amoled", "midnight", "graphite"]) {
   b.style.setProperty("--swatch-bg", preset.bg);
   b.style.setProperty("--swatch-accent", preset.outgoing);
   b.setAttribute("aria-controls", "preview");
-  b.onclick = () => selectPreset(key);
+  b.onclick = () => {
+    if (preview.dataset.preset === key) return;
+    selectPreset(key);
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      preview.getAnimations().forEach((animation) => {
+        if (animation.id === "preset-reveal") animation.cancel();
+      });
+      preview.animate(
+        [{ clipPath: "inset(0 0 18% 0)", opacity: .65 }, { clipPath: "inset(0)", opacity: 1 }],
+        { id: "preset-reveal", duration: 300, easing: "cubic-bezier(.22, 1, .36, 1)" }
+      );
+    }
+  };
   tabs.append(b);
 }
 selectPreset("system24");
