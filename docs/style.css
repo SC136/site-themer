@@ -67,6 +67,7 @@ h1 { color: var(--accent); font-size: clamp(3rem,7vw,6.3rem); line-height: .98; 
 .lead { max-width: 29rem; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .35rem; }
 .button { display: inline-flex; align-items: center; gap: .8rem; padding: .72rem .85rem; font-size: .9rem; font-weight: 700; text-decoration: none; }
+.action-icon { width: 1.15em; height: 1.15em; flex: none; vertical-align: -.2em; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .primary { color: var(--selected-ink); background: var(--selected); }
 .primary:hover { filter: brightness(.9); }
 .text-button:hover { color: var(--accent); }
@@ -137,12 +138,49 @@ h1 { color: var(--accent); font-size: clamp(3rem,7vw,6.3rem); line-height: .98; 
 .install, .faq { padding-block: clamp(3rem, 7vw, 6rem); }
 .section-heading h2 { font-size: clamp(2.7rem,5vw,4.75rem); line-height: 1; margin-block: .65rem; }
 .section-heading > p, .steps p, .faq-list p { color: var(--muted); }
-.steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .85rem; margin: 1.4rem 0 0; padding: 0; list-style: none; counter-reset: steps; }
-.steps li { counter-increment: steps; background: var(--card); border: 1px solid var(--line); padding: 1rem; }
-.steps li::before { content: "0" counter(steps); display: block; margin-bottom: .5rem; font: .78rem var(--mono); color: var(--accent); }
-.steps h3 { font-size: 1.06rem; margin-bottom: .4rem; }
-.steps p, .faq-list p { font-size: .9rem; }
+.steps { display: grid; gap: .8rem; margin: 1.4rem 0 0; padding: 0; list-style: none; counter-reset: steps; }
+.steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  align-items: start;
+  gap: clamp(.75rem,2.4vw,1.5rem);
+  counter-increment: steps;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--accent);
+  padding: clamp(.85rem,2.6vw,1.65rem);
+}
+.steps li::before {
+  content: counter(steps, decimal-leading-zero);
+  display: grid;
+  place-items: center;
+  width: clamp(2rem,5vw,3rem);
+  aspect-ratio: 1;
+  background: var(--selected);
+  color: var(--selected-ink);
+  font: 700 clamp(.85rem,2vw,1.15rem) var(--mono);
+}
+.step-body { max-width: 48rem; }
+.steps h3 { font-size: clamp(1.1rem,2.2vw,1.4rem); line-height: 1.3; margin-bottom: .35rem; }
+.steps p { font-size: 1rem; }
+.steps strong { color: var(--ink); }
+.faq-list p { font-size: .9rem; }
 .steps a, .faq-list a { color: var(--accent); }
+.steps .install-download {
+  display: inline-block;
+  margin-top: .75rem;
+  padding: .4rem .72rem;
+  background: var(--selected);
+  color: var(--selected-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.install-download:hover { filter: brightness(.9); }
+.step-next { margin-top: .85rem; }
+.dark-mode-paths { display: grid; gap: .45rem; margin: .75rem 0; }
+.dark-mode-paths > div { padding: .45rem .65rem; border-inline-start: 2px solid var(--accent); background: var(--band); }
+.dark-mode-paths dt { font-weight: 700; }
+.dark-mode-paths dd { margin: 0; color: var(--muted); }
 .browser-picker { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .75rem; }
 .browser-picker button, .address button { border: 1px solid var(--line); background: transparent; color: var(--ink); padding: .25rem .42rem; font-size: .76rem; }
 .browser-picker button[aria-pressed="true"], .address button { background: var(--ink); color: var(--button-fg); border-color: var(--ink); }
@@ -150,9 +188,34 @@ h1 { color: var(--accent); font-size: clamp(3rem,7vw,6.3rem); line-height: .98; 
 .address code { font: .75rem var(--mono); overflow-wrap: anywhere; }
 .steps .address-status { font-size: .76rem; margin-top: .3rem; }
 .status { border-inline-start: 3px solid var(--accent); padding: .45rem .7rem; margin-top: 1rem; color: var(--accent); }
-details summary { cursor: pointer; font-weight: 650; }
-.steps details { margin-top: .65rem; font-size: .8rem; }
-.steps details p { margin-top: .4rem; font-size: .78rem; }
+details summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; list-style: none; cursor: pointer; font-weight: 650; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after {
+  content: "";
+  width: .45em;
+  height: .45em;
+  flex: none;
+  margin-inline-end: .2em;
+  border: solid var(--muted);
+  border-width: 0 .1em .1em 0;
+  transform: translateY(-.12em) rotate(45deg);
+}
+details[open] > summary::after { transform: translateY(.12em) rotate(225deg); }
+.install-help { margin-top: .8rem; border: 1px solid var(--line); background: var(--card); }
+.install-help summary { padding: .85rem 1rem; color: var(--accent); }
+.install-help form { display: grid; gap: .55rem; padding: 0 1rem 1rem; }
+.install-help label { font-weight: 650; }
+.install-help textarea {
+  width: 100%;
+  padding: .6rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  resize: vertical;
+}
+.install-help p { color: var(--muted); font-size: .85rem; }
+.install-help button { justify-self: start; border: 0; }
 .faq { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; border-top: 1px solid var(--line); }
 .faq-list details { padding: .75rem 0; border-bottom: 1px solid var(--line); }
 .faq-list details:first-child { border-top: 1px solid var(--line); }
@@ -186,7 +249,7 @@ details summary { cursor: pointer; font-weight: 650; }
   .site-header { min-height: 4.2rem; }
   .site-header nav { gap: .65rem; font-size: .8rem; }
   .header-action { display: none; }
-  .benefit-list, .steps, .faq { grid-template-columns: minmax(0,1fr); gap: .6rem; }
+  .benefit-list, .faq { grid-template-columns: minmax(0,1fr); gap: .6rem; }
   .benefit-list > div { padding: .65rem 0; border: 0 !important; }
   .benefit-list > div + div { border-top: 1px solid var(--line) !important; }
   .faq { gap: 1rem; }

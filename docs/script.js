@@ -78,6 +78,12 @@ document.getElementById("copy-url").onclick = async () => {
   }
 };
 
+// Add install context to the question without changing the text in the form.
+document.getElementById("install-help-form").addEventListener("formdata", ({ formData }) => {
+  const question = formData.get("q").trim();
+  formData.set("q", "Help me install Site Themer, an unpacked browser extension for Chrome, Edge, and Brave. My question: " + question);
+});
+
 // Show setup after the hero download starts.
 for (const link of document.querySelectorAll("a[download]")) {
   link.addEventListener("click", () => {

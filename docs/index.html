@@ -36,7 +36,7 @@
       <a href="#faq">FAQ</a>
     </nav>
     <div class="header-tools">
-      <a class="header-action" href="https://github.com/SC136/site-themer">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="header-action" href="https://github.com/SC136/site-themer">GitHub <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5h6v6m0-6-9 9m8-1v6H5V6h6"/></svg></a>
       <button class="appearance" id="theme" type="button" aria-label="Dark page appearance" aria-pressed="true">◐</button>
     </div>
   </header>
@@ -51,8 +51,8 @@
           </div>
           <div class="hero-download">
             <div class="actions">
-              <a class="button primary" href="downloads/site-themer.zip" download>Download extension <span aria-hidden="true">↓</span></a>
-              <a class="button text-button" href="#install">How to install <span aria-hidden="true">↘</span></a>
+              <a class="button primary" href="downloads/site-themer.zip" download>Download extension <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
+              <a class="button text-button" href="#install">How to install <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
             </div>
             <p class="compatibility">Chrome · Edge · Brave <span>v1.5.0</span></p>
           </div>
@@ -126,27 +126,48 @@
     <section class="wrap install" id="install">
       <div class="section-heading">
         <h2>Install in three steps.</h2>
-        <p>Install once, then switch themes from the extension popup.</p>
+        <p>Follow these steps in Chrome, Edge, or Brave.</p>
       </div>
       <p class="status" id="started" role="status" hidden>Download started. Unzip the file, then follow the steps below.</p>
-      <ol class="steps">
+      <ol class="steps" role="list">
         <li>
-          <h3>Download and unzip</h3>
-          <p><a href="downloads/site-themer.zip" download>Get the ZIP</a> and extract it. Keep the extracted folder somewhere permanent so the browser can keep loading it.</p>
+          <div class="step-body">
+            <h3>Download and unzip</h3>
+            <p>Extract the ZIP and keep the <code>site-themer</code> folder somewhere permanent, such as Documents.</p>
+            <a class="install-download" href="downloads/site-themer.zip" download>Download the ZIP</a>
+          </div>
         </li>
         <li>
-          <h3>Load the extension</h3>
-          <p>Open your browser’s extensions page, enable <strong>Developer mode</strong>, and click <strong>Load unpacked</strong>. Select the folder containing <code>manifest.json</code>.</p>
-          <div class="browser-picker" id="browsers" role="group" aria-label="Choose your browser"></div>
-          <div class="address"><code id="ext-url">chrome://extensions</code><button type="button" id="copy-url">Copy</button></div>
-          <p class="address-status" id="copy-status" role="status"></p>
+          <div class="step-body">
+            <h3>Load the extension</h3>
+            <p>Choose your browser, then copy and paste this address into a new tab.</p>
+            <div class="browser-picker" id="browsers" role="group" aria-label="Choose your browser"></div>
+            <div class="address"><code id="ext-url">chrome://extensions</code><button type="button" id="copy-url">Copy</button></div>
+            <p class="address-status" id="copy-status" role="status"></p>
+            <p class="step-next">Turn on <strong>Developer mode</strong>, click <strong>Load unpacked</strong>, and select the folder that contains <code>manifest.json</code>.</p>
+          </div>
         </li>
         <li>
-          <h3>Pick your dark theme</h3>
-          <p>Turn on the site’s own dark mode, then refresh. Pin Site Themer from your browser’s extensions menu and choose a preset for either site.</p>
-          <details><summary>Where to find dark mode</summary><p><strong>WhatsApp Web</strong> · Settings → Chat → Theme → Dark<br><strong>YouTube</strong> · Profile → Appearance → Dark theme</p></details>
+          <div class="step-body">
+            <h3>Enable dark mode and pick a theme</h3>
+            <p>Turn on the site’s built-in dark mode, then refresh the page.</p>
+            <dl class="dark-mode-paths">
+              <div><dt>WhatsApp Web</dt><dd>Settings → Chat → Theme → Dark</dd></div>
+              <div><dt>YouTube</dt><dd>Profile → Appearance → Dark theme</dd></div>
+            </dl>
+            <p>Pin Site Themer from your browser’s extensions menu, then open it and pick a preset.</p>
+          </div>
         </li>
       </ol>
+      <details class="install-help">
+        <summary>Need help installing?</summary>
+        <form id="install-help-form" action="https://chatgpt.com/" method="get" target="_blank" rel="noopener noreferrer">
+          <label for="install-question">What went wrong?</label>
+          <textarea id="install-question" name="q" rows="3" maxlength="1200" required aria-describedby="install-help-note" placeholder="Which browser are you using? Which step or error are you stuck on?"></textarea>
+          <p id="install-help-note">Sends your question to an AI assistant in a new tab. Leave out personal details.</p>
+          <button class="button primary" type="submit">Send question</button>
+        </form>
+      </details>
     </section>
 
     <section class="wrap faq" id="faq">
@@ -164,7 +185,7 @@
   <footer class="site-footer wrap">
     <a class="wordmark" href="#"><img src="favicon.svg" width="26" height="26" alt="">Site Themer</a>
     <p>Illustrative previews. Controls built with <a href="https://ui-sdk.dev/docs">UI SDK</a>. system24 is adapted from <a href="https://github.com/refact0r/system24">refact0r’s theme</a>.</p>
-    <a href="https://github.com/SC136/site-themer">Source <span aria-hidden="true">↗</span></a>
+    <a href="https://github.com/SC136/site-themer">Source <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5h6v6m0-6-9 9m8-1v6H5V6h6"/></svg></a>
     <p class="footer-credit">
       <span id="credit-prefix">Orchestrated by</span>
       <a class="credit-signature" href="https://sc.is-a.dev/">SC</a><span id="credit-middle"> &amp; his</span>
