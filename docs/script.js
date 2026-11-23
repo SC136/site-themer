@@ -1,8 +1,8 @@
 // Keep in sync with PRESETS in site-themer/shared/registry.js
 const PRESETS = {
-  amoled:   { name: "amoled black", bg: "#000000", surface: "#080808", border: "#141414", input: "#0b0b0b", incoming: "#0f0f0f", outgoing: "#0b3d2e" },
-  midnight: { name: "midnight",     bg: "#05070d", surface: "#0c111c", border: "#1a2233", input: "#0f1522", incoming: "#121a2a", outgoing: "#1f3b6e" },
-  graphite: { name: "graphite",     bg: "#0e0e10", surface: "#17171a", border: "#26262b", input: "#1c1c20", incoming: "#222226", outgoing: "#2f4f4a" },
+  amoled:   { name: "AMOLED Black", bg: "#000000", surface: "#080808", border: "#141414", input: "#0b0b0b", incoming: "#0f0f0f", outgoing: "#0b3d2e" },
+  midnight: { name: "Midnight",     bg: "#05070d", surface: "#0c111c", border: "#1a2233", input: "#0f1522", incoming: "#121a2a", outgoing: "#1f3b6e" },
+  graphite: { name: "Graphite",     bg: "#0e0e10", surface: "#17171a", border: "#26262b", input: "#1c1c20", incoming: "#222226", outgoing: "#2f4f4a" },
   system24: { name: "system24",     bg: "#141414", surface: "#1d1d1d", border: "#515151", input: "#272727", incoming: "#272727", outgoing: "#372645" }
 };
 
@@ -71,74 +71,58 @@ for (const button of siteButtons) {
   };
 }
 
-// browser picker + copy button for the extensions page address
-const BROWSERS = { chrome: "chrome://extensions", edge: "edge://extensions", brave: "brave://extensions" };
-const urlEl = document.getElementById("ext-url");
+// Browser picker and clipboard fallback for internal extensions URLs.
+const browsers = { Chrome: "chrome://extensions", Edge: "edge://extensions", Brave: "brave://extensions" };
 const picker = document.getElementById("browsers");
-const copyBtn = document.getElementById("copy-url");
+const urlEl = document.getElementById("ext-url");
+const copyStatus = document.getElementById("copy-status");
 
-function pickBrowser(key) {
-  urlEl.textContent = BROWSERS[key];
-  picker.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.key === key));
+function pickBrowser(browser) {
+  urlEl.textContent = browsers[browser];
+  copyStatus.textContent = "";
+  for (const button of picker.children) {
+    button.setAttribute("aria-pressed", String(button.textContent === browser));
+  }
 }
-for (const key in BROWSERS) {
-  const b = document.createElement("button");
-  b.type = "button";
-  b.textContent = key;
-  b.dataset.key = key;
-  b.onclick = () => pickBrowser(key);
-  picker.append(b);
+for (const browser of Object.keys(browsers)) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = browser;
+  button.onclick = () => pickBrowser(browser);
+  picker.append(button);
 }
-const ua = navigator.userAgent;
-pickBrowser(ua.includes("Edg/") ? "edge" : navigator.brave ? "brave" : "chrome");
+pickBrowser(navigator.userAgent.includes("Edg/") ? "Edge" : navigator.brave ? "Brave" : "Chrome");
 
-// show cmd instead of ctrl on mac
-if (/Mac|iPhone|iPad/.test(navigator.platform)) {
-  document.querySelectorAll(".k-new").forEach((k) => (k.textContent = "cmd"));
-}
-const keys = document.getElementById("keys");
-
-copyBtn.onclick = async () => {
-  keys.classList.add("on");
+document.getElementById("copy-url").onclick = async () => {
   try {
     await navigator.clipboard.writeText(urlEl.textContent);
-    copyBtn.textContent = "copied!";
+    copyStatus.textContent = "Copied. Paste the address into a new tab.";
   } catch {
-    const r = document.createRange();
-    r.selectNodeContents(urlEl);
-    getSelection().removeAllRanges();
-    getSelection().addRange(r);
-    copyBtn.textContent = "press ctrl+c";
+    const selection = getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(urlEl);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    copyStatus.textContent = "Address selected. Copy it and paste it into a new tab.";
   }
-  setTimeout(() => (copyBtn.textContent = "copy"), 1800);
 };
 
-// after a download starts, guide the user to the install steps
-document.querySelectorAll("a[download]").forEach((a) => {
-  a.addEventListener("click", () => {
-    const install = document.getElementById("install");
-    const note = document.getElementById("started");
-    if (note) note.hidden = false;
-    setTimeout(() => {
-      install.scrollIntoView({ behavior: "smooth", block: "start" });
-      install.classList.remove("flash");
-      void install.offsetWidth;
-      install.classList.add("flash");
-    }, 400);
+// Show setup after the hero download starts.
+for (const link of document.querySelectorAll("a[download]")) {
+  link.addEventListener("click", () => {
+    document.getElementById("started").hidden = false;
+    if (!link.closest("#install")) document.getElementById("install").scrollIntoView();
   });
-});
+}
 
-// light / dark toggle with circular reveal from the button
-const toggle = document.getElementById("theme");
-toggle.onclick = () => {
-  const r = toggle.getBoundingClientRect();
-  const root = document.documentElement;
-  root.style.setProperty("--rx", ((r.left + r.width / 2) / innerWidth) * 100 + "%");
-  root.style.setProperty("--ry", ((r.top + r.height / 2) / innerHeight) * 100 + "%");
-  const flip = () => {
-    const light = root.classList.toggle("light");
-    localStorage.setItem("theme", light ? "light" : "dark");
-  };
-  if (document.startViewTransition) document.startViewTransition(flip);
-  else flip();
+const appearance = document.getElementById("theme");
+function setAppearance(dark) {
+  document.documentElement.classList.toggle("dark", dark);
+  appearance.setAttribute("aria-pressed", String(dark));
+}
+try { setAppearance(localStorage.getItem("theme") === "dark"); } catch {}
+appearance.onclick = () => {
+  const dark = appearance.getAttribute("aria-pressed") === "false";
+  setAppearance(dark);
+  try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
 };

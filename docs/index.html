@@ -1,230 +1,144 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>site themer</title>
-  <meta name="description" content="Preview four dark themes for WhatsApp Web and YouTube, including the terminal-inspired system24.">
-  <meta property="og:title" content="site themer">
-  <meta property="og:description" content="Try AMOLED Black, Midnight, Graphite, and system24 on WhatsApp Web and YouTube.">
-  <script>if(localStorage.getItem("theme")==="light")document.documentElement.classList.add("light")</script>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Themer — A better shade of dark</title>
+  <meta name="description" content="Four dark themes for WhatsApp Web and YouTube. Try them live, then install Site Themer for Chrome, Edge, or Brave.">
+  <meta property="og:title" content="Site Themer">
+  <meta property="og:description" content="A better shade of dark for WhatsApp Web and YouTube.">
   <meta property="og:image" content="https://sc.is-a.dev/site-themer/logo-512.png">
+  <meta name="theme-color" content="#f7f3eb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="brand" href="#" aria-label="site themer">
-    <img src="favicon.svg" width="36" height="36" alt="site themer logo">
-    <span>site themer</span>
-  </a>
-
-  <button id="theme" aria-label="toggle theme" title="toggle theme">
-    <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-    <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg>
-  </button>
-
-  <div class="blur blur-top"></div>
-  <div class="blur blur-bottom"></div>
-
-  <main class="page">
-    <div class="top">
-      <div>
-        <h2>what it does</h2>
-        <ul class="list">
-          <li>- works on whatsapp web and youtube</li>
-          <li>- true <span class="mono accent">#000</span> backgrounds, 4 themes</li>
-          <li>- site options: bubble colors, privacy blur, no ambient glow</li>
-        </ul>
-      </div>
-      <div class="links">
-        <h2>links</h2>
-        <ul class="list">
-          <li><a href="#download">download</a></li>
-          <li><a href="#install" class="hl">how to install</a></li>
-          <li><a href="#themes">themes</a></li>
-          <li><a href="#faq">faq</a></li>
-          <li><a href="https://github.com/SC136/site-themer" target="_blank" rel="noopener noreferrer">github</a></li>
-        </ul>
-      </div>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#"><img src="favicon.svg" width="32" height="32" alt="">Site Themer</a>
+    <nav aria-label="Main navigation">
+      <a href="#themes">Themes</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-tools">
+      <a class="header-action" href="https://github.com/SC136/site-themer">GitHub <span aria-hidden="true">↗</span></a>
+      <button class="appearance" id="theme" type="button" aria-label="Dark page appearance" aria-pressed="false">◐</button>
     </div>
+  </header>
 
-    <article class="article">
-      <h1>site themer</h1>
-      <div class="meta">version: <span class="italic">1.4.3</span> &middot; chromium only &middot; free &middot; no tracking</div>
-      <hr>
-      <p>dark mode on whatsapp web and youtube is grey. mine isn't anymore. this is a small browser extension that turns them into proper amoled black, with a few themes and per-site options so it feels like yours.</p>
-            <p class="sites"><span>supported sites:</span> <b>whatsapp web</b> <b>youtube</b></p>
-
-      <section id="download">
-        <div class="frame">
-          <div class="frame-content">
-            <p>tldr; download it, unzip it, then follow the 6 install steps below. it takes about a minute and there's nothing to sign up for.</p>
-            <p class="cta"><a class="btn" href="downloads/site-themer.zip" download>download for chrome / edge / brave</a> <a class="btn ghost" href="#install">how to install &darr;</a></p>
-          </div>
-          <div class="gutter left"></div>
-          <div class="gutter right"></div>
-          <div class="rule top"></div>
-          <div class="rule bottom"></div>
+  <main>
+    <div class="hero wrap" id="download">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Browser extension</p>
+        <h1>A better shade<br>of <em>dark.</em></h1>
+        <p class="lead">Make WhatsApp Web and YouTube feel like yours. Go true black, cool navy, soft charcoal, or full terminal.</p>
+        <div class="actions">
+          <a class="button primary" href="downloads/site-themer.zip" download>Download extension <span aria-hidden="true">↓</span></a>
+          <a class="button text-button" href="#install">How to install <span aria-hidden="true">↘</span></a>
         </div>
-      </section>
+        <p class="compatibility">Chrome · Edge · Brave <span>v1.4.3</span></p>
+      </div>
 
-      <section id="themes" aria-labelledby="theme-showcase-title">
-        <h2 id="theme-showcase-title">try the themes</h2>
-        <p class="showcase-intro">Pick a theme, then switch between WhatsApp Web and YouTube to compare how it looks.</p>
-        <div class="preset-picker" id="tabs" role="group" aria-label="Theme preset"></div>
-        <p class="preset-description" id="preset-description" aria-live="polite"></p>
-        <div class="preview-sites" role="group" aria-label="Preview site">
-          <button type="button" data-site="whatsapp" aria-controls="preview-whatsapp" aria-pressed="true">WhatsApp Web</button>
-          <button type="button" data-site="youtube" aria-controls="preview-youtube" aria-pressed="false">YouTube</button>
+      <section class="studio" id="themes" aria-labelledby="theme-showcase-title">
+        <div class="studio-top">
+          <h2 id="theme-showcase-title">Theme studio</h2>
+          <div class="preview-sites" role="group" aria-label="Preview site">
+            <button type="button" data-site="whatsapp" aria-controls="preview-whatsapp" aria-pressed="true">WhatsApp</button>
+            <button type="button" data-site="youtube" aria-controls="preview-youtube" aria-pressed="false">YouTube</button>
+          </div>
         </div>
         <div class="preview" id="preview">
-          <div class="preview-chat" id="preview-whatsapp" role="group" aria-label="WhatsApp Web preview">
-            <div class="side">
-              <div class="bar">WhatsApp</div>
-              <div class="chat selected">alex<small>see you at 8</small></div>
-              <div class="chat">family<small>photos attached</small></div>
-              <div class="chat">work<small>meeting moved</small></div>
+          <div class="preview-chat" id="preview-whatsapp" role="group" aria-label="WhatsApp Web illustration">
+            <div class="chat-list">
+              <div class="scene-bar">WhatsApp</div>
+              <div class="chat selected">Alex<small>See you at 8</small></div>
+              <div class="chat">Family<small>Photos attached</small></div>
+              <div class="chat">Work<small>Meeting moved</small></div>
             </div>
-            <div class="main">
-              <div class="bar">alex</div>
-              <div class="msgs">
-                <div class="bubble in">are we still on for tonight?</div>
-                <div class="bubble out">yes! see you at 8.</div>
-                <div class="bubble in">perfect.</div>
+            <div class="conversation">
+              <div class="scene-bar"><span class="avatar" aria-hidden="true">A</span> Alex</div>
+              <div class="messages">
+                <div class="bubble incoming">Still on for tonight?</div>
+                <div class="bubble outgoing">Yep, see you at 8.</div>
+                <div class="bubble incoming">Perfect.</div>
               </div>
-              <div class="input">Type a message</div>
+              <div class="composer">Type a message</div>
             </div>
           </div>
-          <div class="preview-video" id="preview-youtube" role="group" aria-label="YouTube preview" hidden>
-            <div class="bar">YouTube</div>
+          <div class="preview-video" id="preview-youtube" role="group" aria-label="YouTube illustration" hidden>
+            <div class="scene-bar">YouTube</div>
             <div class="video-layout">
-              <div class="video-watch">
-                <div class="video-player" aria-hidden="true"><span class="video-play"></span><span class="video-progress"></span></div>
-                <div class="video-title">Night Signals &middot; a late-night mix</div>
-                <div class="video-byline">After Hours</div>
+              <div>
+                <div class="video-player" aria-hidden="true"><span class="play">▶</span><span class="progress"></span></div>
+                <div class="video-title">Night Signals · a late-night mix</div>
+                <small>After Hours</small>
               </div>
               <div class="video-queue">
-                <div class="video-next">Up next</div>
+                <b>Up next</b>
                 <div class="video-item"><span aria-hidden="true"></span>Blue Hour</div>
                 <div class="video-item"><span aria-hidden="true"></span>City Lights</div>
               </div>
             </div>
           </div>
         </div>
-        <p class="note">Illustrative previews. system24 is adapted from <a href="https://github.com/refact0r/system24">refact0r’s theme</a>, and the picker is inspired by <a href="https://ui-feed.dev/p/tabs-kinetic-poster-2q6zs0">UI Feed’s Kinetic Poster</a>.</p>
+        <div class="preset-picker" id="tabs" role="group" aria-label="Theme preset"></div>
+        <p class="preset-description" id="preset-description" aria-live="polite"></p>
       </section>
-
-      <section id="install">
-        <div class="install-head">
-          <p id="started" class="started" hidden>&#10003; your download has started. now follow these steps to install it.</p>
-          <span class="badge">takes about 1 minute</span>
-          <h2>how to install</h2>
-          <p>it isn't in a web store yet, so you add it by hand. it's safe, and you only do this once. follow the 6 steps below in order.</p>
-        </div>
-
-        <ol class="steps">
-          <li class="step">
-            <span class="num">1</span>
-            <div class="body">
-              <h3>download and unzip</h3>
-              <p>click <a href="downloads/site-themer.zip" download>download</a>. then unzip the file: right-click it and choose <strong>extract all</strong> (on mac, double-click it).</p>
-              <p class="tip"><b>important:</b> keep the unzipped <code>site-themer</code> folder somewhere permanent, like documents. if you delete it, the extension stops working.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="num">2</span>
-            <div class="body">
-              <h3>open your browser's extensions page</h3>
-              <p>pick your browser, then click <strong>copy</strong>.</p>
-              <div class="browsers" id="browsers"></div>
-              <div class="copybox">
-                <code id="ext-url">chrome://extensions</code>
-                <button type="button" id="copy-url">copy</button>
-              </div>
-              <p class="keys" id="keys">then press <kbd class="k-new">ctrl</kbd> + <kbd>t</kbd> to open a new tab, <kbd class="k-new">ctrl</kbd> + <kbd>v</kbd> to paste, and <kbd>enter</kbd>.</p>
-              <p class="tip">browsers don't let websites open this page for you, so it has to be pasted into the address bar.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="num">3</span>
-            <div class="body">
-              <h3>turn on developer mode</h3>
-              <p>find the <strong>developer mode</strong> switch and turn it on. it's in the <strong>top-right corner</strong> (in edge it's in the <strong>left sidebar</strong>). three new buttons appear.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="num">4</span>
-            <div class="body">
-              <h3>click "load unpacked"</h3>
-              <p>click <strong>load unpacked</strong>, then pick the <code>site-themer</code> folder you unzipped in step 1.</p>
-              <p class="tip">pick the folder that directly contains <code>manifest.json</code>. if you see "manifest file is missing", you're one folder too high or too low.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="num">5</span>
-            <div class="body">
-              <h3>switch the site to dark mode</h3>
-              <p><strong>whatsapp:</strong> open <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">web.whatsapp.com</a> and go to <strong>settings &rarr; chat &rarr; theme &rarr; dark</strong>.</p>
-              <p><strong>youtube:</strong> open <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">youtube.com</a>, click your profile picture, then <strong>appearance &rarr; dark theme</strong>.</p>
-              <p class="tip">the themes only work on top of each site's own dark mode. refresh the page once afterwards.</p>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="num">6</span>
-            <div class="body">
-              <h3>pick your theme</h3>
-              <p>click the <strong>puzzle-piece icon</strong> in your browser toolbar, pin <strong>site themer</strong>, then click it to choose a theme. changes show up right away.</p>
-            </div>
-          </li>
-        </ol>
-
-        <p class="done"><strong>that's it.</strong> if something doesn't look right, check the <a href="#faq">faq</a>.</p>
-      </section>
-
-      <section id="faq">
-        <h2>faq</h2>
-        <div class="entry">
-          <h3>nothing changed after installing</h3>
-          <p>reload the whatsapp or youtube tab and make sure the site's own theme is set to dark.</p>
-        </div>
-        <hr>
-        <div class="entry">
-          <h3>"manifest file is missing or unreadable"</h3>
-          <p>you picked the wrong folder. select the one that directly contains <code>manifest.json</code>.</p>
-        </div>
-        <hr>
-        <div class="entry">
-          <h3>some parts turned grey after a site update</h3>
-          <p>whatsapp and youtube change their pages often. <a href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a> and i'll update the theme.</p>
-        </div>
-        <hr>
-        <div class="entry">
-          <h3>is it safe?</h3>
-          <p>the code is open source on github. it's css plus a small settings popup, and it only asks for storage permission to remember your theme.</p>
-        </div>
-        <hr>
-        <div class="entry">
-          <h3>firefox or safari?</h3>
-          <p>not supported yet.</p>
-        </div>
-      </section>
-    </article>
-
-    <div class="card">
-      <h2>found something broken?</h2>
-      <p>no spam, no noise. just tell me what stayed grey and i'll fix it.</p>
-      <a class="btn" href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a>
     </div>
 
-    <p class="foot">not affiliated with whatsapp, meta, youtube or google. site themer changes how these sites look in your own browser.</p>
+    <div class="benefits">
+      <div class="wrap benefit-list">
+        <div><strong>Four dark palettes</strong><span>From true black to terminal purple</span></div>
+        <div><strong>Per-site controls</strong><span>Chat colors, privacy blur, and player options</span></div>
+        <div><strong>Open source</strong><span>Free to use, with no account or tracking</span></div>
+      </div>
+    </div>
+
+    <section class="wrap install" id="install">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Setup</p>
+        <h2>Get it running.</h2>
+        <p>Install once, then switch themes from the extension popup.</p>
+      </div>
+      <p class="status" id="started" role="status" hidden>Download started. Unzip the file, then follow the steps below.</p>
+      <ol class="steps">
+        <li>
+          <h3>Download and unzip</h3>
+          <p><a href="downloads/site-themer.zip" download>Get the ZIP</a> and extract it. Keep the extracted folder somewhere permanent so the browser can keep loading it.</p>
+        </li>
+        <li>
+          <h3>Load the extension</h3>
+          <p>Open your browser’s extensions page, enable <strong>Developer mode</strong>, and click <strong>Load unpacked</strong>. Select the folder containing <code>manifest.json</code>.</p>
+          <div class="browser-picker" id="browsers" role="group" aria-label="Choose your browser"></div>
+          <div class="address"><code id="ext-url">chrome://extensions</code><button type="button" id="copy-url">Copy</button></div>
+          <p class="address-status" id="copy-status" role="status"></p>
+        </li>
+        <li>
+          <h3>Pick your dark theme</h3>
+          <p>Turn on the site’s own dark mode, then refresh. Pin Site Themer from your browser’s extensions menu and choose a preset for either site.</p>
+          <details><summary>Where to find dark mode</summary><p><strong>WhatsApp Web</strong> · Settings → Chat → Theme → Dark<br><strong>YouTube</strong> · Profile → Appearance → Dark theme</p></details>
+        </li>
+      </ol>
+    </section>
+
+    <section class="wrap faq" id="faq">
+      <div class="section-heading"><p class="eyebrow"><span></span> Help</p><h2>Questions?</h2></div>
+      <div class="faq-list">
+        <details><summary>Why didn’t the theme change?</summary><p>Enable the site’s built-in dark mode and refresh the tab. Check that Site Themer is enabled for that site in the popup.</p></details>
+        <details><summary>What if the manifest is missing?</summary><p>In <strong>Load unpacked</strong>, choose the extracted folder that directly contains <code>manifest.json</code>.</p></details>
+        <details><summary>What permissions does it need?</summary><p>Site Themer uses browser storage to remember your settings and applies its theme on WhatsApp Web and YouTube.</p></details>
+        <details><summary>Does it work in Firefox or Safari?</summary><p>The current release supports Chrome, Edge, and Brave.</p></details>
+        <details><summary>Where can I report a bug?</summary><p><a href="https://github.com/SC136/site-themer/issues">Open a GitHub issue</a> with the site, preset, and a description of what looks wrong.</p></details>
+      </div>
+    </section>
   </main>
-  <script src="script.js"></script>
+
+  <footer class="site-footer wrap">
+    <a class="wordmark" href="#"><img src="favicon.svg" width="26" height="26" alt="">Site Themer</a>
+    <p>Independent project. Illustrative previews. system24 is adapted from <a href="https://github.com/refact0r/system24">refact0r’s theme</a>.</p>
+    <a href="https://github.com/SC136/site-themer">Source <span aria-hidden="true">↗</span></a>
+  </footer>
 </body>
 </html>
