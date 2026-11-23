@@ -3,8 +3,12 @@ const fs = require("fs");
 const zlib = require("zlib");
 const path = require("path");
 
-const BG = [9, 9, 11];
-const FG = [56, 189, 248];
+const BG = [30, 18, 45];
+const MARK = [
+  { color: [171, 127, 247], points: [[18, 58], [46, 74], [74, 58], [74, 68], [46, 84], [18, 68]] },
+  { color: [238, 191, 248], points: [[18, 46], [46, 30], [74, 46], [46, 62]] },
+  { color: [255, 241, 204], points: [[77, 14], [80, 22], [88, 25], [80, 28], [77, 36], [74, 28], [66, 25], [74, 22]] },
+];
 
 function crc32(buf) {
   let c, crc = ~0;
@@ -53,13 +57,20 @@ const inRoundRect = (x, y, r) => {
   const cx = Math.min(Math.max(x, r), 1 - r), cy = Math.min(Math.max(y, r), 1 - r);
   return (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
 };
-const inCircle = (x, y, cx, cy, r) => (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
+function inPolygon(x, y, points) {
+  let inside = false;
+  for (let index = 0; index < points.length; index++) {
+    const [ax, ay] = points[index];
+    const [bx, by] = points[(index + 1) % points.length];
+    if ((ay > y) !== (by > y) && x < ax + (bx - ax) * (y - ay) / (by - ay)) inside = !inside;
+  }
+  return inside;
+}
 
-// dark rounded square with a sky-blue crescent
+// A pair of theme layers and a star on a dark rounded tile.
 const logo = (x, y) => {
   if (!inRoundRect(x, y, 0.22)) return null;
-  const moon = inCircle(x, y, 0.5, 0.5, 0.29) && !inCircle(x, y, 0.62, 0.4, 0.25);
-  return moon ? FG : BG;
+  return MARK.find(({ points }) => inPolygon(x * 100, y * 100, points))?.color || BG;
 };
 
 const root = path.join(__dirname, "..");
@@ -77,11 +88,14 @@ for (const [file, size] of targets) {
   console.log("wrote", file);
 }
 
+const toHex = (rgb) => "#" + Buffer.from(rgb).toString("hex");
+const markSvg = MARK.map(({ color, points }) =>
+  `  <polygon points="${points.map((point) => point.join(",")).join(" ")}" fill="${toHex(color)}"/>`
+).join("\n");
 fs.writeFileSync(path.join(root, "docs/favicon.svg"),
 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#09090b"/>
-  <mask id="m"><rect width="100" height="100" fill="#fff"/><circle cx="62" cy="40" r="25" fill="#000"/></mask>
-  <circle cx="50" cy="50" r="29" fill="#38bdf8" mask="url(#m)"/>
+  <rect width="100" height="100" rx="22" fill="${toHex(BG)}"/>
+${markSvg}
 </svg>
 `);
 console.log("wrote docs/favicon.svg");
