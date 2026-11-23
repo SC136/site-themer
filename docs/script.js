@@ -91,7 +91,7 @@ function setAppearance(dark) {
   document.documentElement.classList.toggle("dark", dark);
   appearance.setAttribute("aria-pressed", String(dark));
 }
-try { setAppearance(localStorage.getItem("theme") === "dark"); } catch {}
+try { setAppearance(localStorage.getItem("theme") !== "light"); } catch {}
 appearance.onclick = () => {
   const dark = appearance.getAttribute("aria-pressed") === "false";
   setAppearance(dark);
