@@ -16,6 +16,7 @@
     root.style.removeProperty("--st-incoming-rgb");
     root.style.removeProperty("--st-outgoing-rgb");
     root.removeAttribute("data-st-site");
+    root.removeAttribute("data-st-preset");
     VARS.forEach((v) => root.style.removeProperty("--st-" + v));
     for (const o of site.options) {
       if (o.attr) root.removeAttribute(o.attr);
@@ -27,7 +28,8 @@
     clear();
     if (!s || !s.enabled) return;
 
-    const p = { ...(PRESETS[s.preset] || PRESETS.amoled) };
+    const presetId = Object.hasOwn(PRESETS, s.preset) ? s.preset : "amoled";
+    const p = { ...PRESETS[presetId] };
     const extra = {};
 
     for (const o of site.options) {
@@ -47,6 +49,7 @@
     root.style.setProperty("--st-outgoing-rgb", rgb(p.outgoing));
     for (const k in extra) root.style.setProperty("--st-" + k, extra[k]);
     root.setAttribute("data-st-site", siteId);
+    root.setAttribute("data-st-preset", presetId);
   }
 
   loadSettings().then((all) => apply(all[siteId]));

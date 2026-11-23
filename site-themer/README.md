@@ -2,7 +2,8 @@
 
 Custom themes for websites. Currently supports **WhatsApp Web** and **YouTube**.
 
-- Three presets for every site: AMOLED Black, Midnight, Graphite
+- Four presets for every site: AMOLED Black, Midnight, Graphite, and system24
+- system24 adapts [refact0r's Discord theme](https://github.com/refact0r/system24) for WhatsApp Web and YouTube with square corners, framed panels and controls, monospace type, and purple accents
 - Per-site on/off
 - WhatsApp options: sent/received bubble colors, message text size, privacy blur (hover to reveal)
 - YouTube options: progress bar color, turn off ambient glow, dim thumbnails until hover

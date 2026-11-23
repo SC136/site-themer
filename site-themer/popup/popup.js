@@ -20,7 +20,7 @@ function optionRow(o, s, preset, update) {
     return el("div", { className: "row" }, o.label, sel);
   }
 
-  const current = s[o.key] || (o.slot ? preset[o.slot] : o.fallback);
+  const current = s[o.key] || preset[o.slot || o.key] || o.fallback;
   const color = el("input", { type: "color", value: current });
   color.onchange = () => update({ [o.key]: color.value });
   const reset = el("button", { textContent: "Reset" });

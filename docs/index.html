@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>site themer</title>
-  <meta name="description" content="a free browser extension that makes whatsapp web and youtube actually black.">
+  <meta name="description" content="Preview four dark themes for WhatsApp Web and YouTube, including the terminal-inspired system24.">
   <meta property="og:title" content="site themer">
-  <meta property="og:description" content="true amoled black and more for whatsapp web and youtube.">
+  <meta property="og:description" content="Try AMOLED Black, Midnight, Graphite, and system24 on WhatsApp Web and YouTube.">
   <script>if(localStorage.getItem("theme")==="light")document.documentElement.classList.add("light")</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -34,7 +34,7 @@
         <h2>what it does</h2>
         <ul class="list">
           <li>- works on whatsapp web and youtube</li>
-          <li>- true <span class="mono accent">#000</span> backgrounds, 3 themes</li>
+          <li>- true <span class="mono accent">#000</span> backgrounds, 4 themes</li>
           <li>- site options: bubble colors, privacy blur, no ambient glow</li>
         </ul>
       </div>
@@ -52,7 +52,7 @@
 
     <article class="article">
       <h1>site themer</h1>
-      <div class="meta">version: <span class="italic">1.3.1</span> &middot; chromium only &middot; free &middot; no tracking</div>
+      <div class="meta">version: <span class="italic">1.4.3</span> &middot; chromium only &middot; free &middot; no tracking</div>
       <hr>
       <p>dark mode on whatsapp web and youtube is grey. mine isn't anymore. this is a small browser extension that turns them into proper amoled black, with a few themes and per-site options so it feels like yours.</p>
             <p class="sites"><span>supported sites:</span> <b>whatsapp web</b> <b>youtube</b></p>
@@ -68,6 +68,52 @@
           <div class="rule top"></div>
           <div class="rule bottom"></div>
         </div>
+      </section>
+
+      <section id="themes" aria-labelledby="theme-showcase-title">
+        <h2 id="theme-showcase-title">try the themes</h2>
+        <p class="showcase-intro">Pick a theme, then switch between WhatsApp Web and YouTube to compare how it looks.</p>
+        <div class="preset-picker" id="tabs" role="group" aria-label="Theme preset"></div>
+        <p class="preset-description" id="preset-description" aria-live="polite"></p>
+        <div class="preview-sites" role="group" aria-label="Preview site">
+          <button type="button" data-site="whatsapp" aria-controls="preview-whatsapp" aria-pressed="true">WhatsApp Web</button>
+          <button type="button" data-site="youtube" aria-controls="preview-youtube" aria-pressed="false">YouTube</button>
+        </div>
+        <div class="preview" id="preview">
+          <div class="preview-chat" id="preview-whatsapp" role="group" aria-label="WhatsApp Web preview">
+            <div class="side">
+              <div class="bar">WhatsApp</div>
+              <div class="chat selected">alex<small>see you at 8</small></div>
+              <div class="chat">family<small>photos attached</small></div>
+              <div class="chat">work<small>meeting moved</small></div>
+            </div>
+            <div class="main">
+              <div class="bar">alex</div>
+              <div class="msgs">
+                <div class="bubble in">are we still on for tonight?</div>
+                <div class="bubble out">yes! see you at 8.</div>
+                <div class="bubble in">perfect.</div>
+              </div>
+              <div class="input">Type a message</div>
+            </div>
+          </div>
+          <div class="preview-video" id="preview-youtube" role="group" aria-label="YouTube preview" hidden>
+            <div class="bar">YouTube</div>
+            <div class="video-layout">
+              <div class="video-watch">
+                <div class="video-player" aria-hidden="true"><span class="video-play"></span><span class="video-progress"></span></div>
+                <div class="video-title">Night Signals &middot; a late-night mix</div>
+                <div class="video-byline">After Hours</div>
+              </div>
+              <div class="video-queue">
+                <div class="video-next">Up next</div>
+                <div class="video-item"><span aria-hidden="true"></span>Blue Hour</div>
+                <div class="video-item"><span aria-hidden="true"></span>City Lights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="note">Illustrative previews of each theme. system24 is adapted from <a href="https://github.com/refact0r/system24">refact0r’s theme</a>.</p>
       </section>
 
       <section id="install">
@@ -142,30 +188,7 @@
         <p class="done"><strong>that's it.</strong> if something doesn't look right, check the <a href="#faq">faq</a>.</p>
       </section>
 
-      <section id="themes">
-        <h2>pick your look</h2>
-                <p class="note" style="margin-bottom:1rem !important">the themes below are shown on a whatsapp mockup. youtube uses the same colors.</p>
-        <div class="tabs" id="tabs"></div>
-        <div class="preview" id="preview">
-          <div class="side">
-            <div class="chat selected">alex<small>see you at 8</small></div>
-            <div class="chat">family<small>photos attached</small></div>
-            <div class="chat">work<small>meeting moved</small></div>
-          </div>
-          <div class="main">
-            <div class="bar">alex</div>
-            <div class="msgs">
-              <div class="bubble in">are we still on for tonight?</div>
-              <div class="bubble out">yes! see you at 8.</div>
-              <div class="bubble in">perfect.</div>
-            </div>
-            <div class="input">type a message</div>
-          </div>
-        </div>
-        <p class="note">this preview is an approximation of the real thing.</p>
-      </section>
-
-<section id="faq">
+      <section id="faq">
         <h2>faq</h2>
         <div class="entry">
           <h3>nothing changed after installing</h3>
@@ -200,7 +223,7 @@
       <a class="btn" href="https://github.com/SC136/site-themer/issues" target="_blank" rel="noopener noreferrer">open an issue</a>
     </div>
 
-    <p class="foot">not affiliated with whatsapp, meta, youtube or google. site themer only changes colors in your own browser.</p>
+    <p class="foot">not affiliated with whatsapp, meta, youtube or google. site themer changes how these sites look in your own browser.</p>
   </main>
   <script src="script.js"></script>
 </body>

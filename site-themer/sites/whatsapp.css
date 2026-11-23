@@ -90,3 +90,139 @@ html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar { width: 8px; height
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-track { background: var(--st-bg); }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb { background: var(--st-border); border-radius: 10px; }
 html[data-st-site="whatsapp"] body.dark ::-webkit-scrollbar-thumb:hover { background: #303030; }
+
+/* system24: square surfaces, outlined panels, and purple selection. */
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark {
+    --st-line: var(--st-border);
+    --st-accent: #c7a2e3;
+    --st-selected: #302339;
+    --st-mono: ui-monospace, Consolas, monospace;
+    font-family: var(--st-mono) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :not(svg, svg *) {
+    border-radius: 0 !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark ::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+    background-color: var(--st-line);
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    button, input, textarea, label, header span, #pane-side span,
+    [contenteditable="true"], .selectable-text
+) {
+    font-family: var(--st-mono) !important;
+}
+
+/* Render the sidebar wordmark as text when WhatsApp supplies it as an icon. */
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark
+:is(#side, #app header:not(#main header)) :is(h1, [role="heading"][aria-level="1"]) {
+    font-family: var(--st-mono) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark
+:is(#side, #app header:not(#main header))
+:is(
+    [data-icon*="wordmark" i], [data-testid*="wordmark" i], [data-icon="whatsapp-logo"], [data-icon="wa-logo"], [aria-label="WhatsApp" i],
+    :is(h1, a, span, div):has(> svg:is([data-icon*="wordmark" i], [data-icon="whatsapp-logo"], [data-icon="wa-logo"], [aria-label="WhatsApp" i]))
+):has(> svg):not(svg)::after {
+    content: "WhatsApp";
+    color: inherit;
+    font: 700 22px/1.2 var(--st-mono) !important;
+    white-space: nowrap;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark
+:is(#side, #app header:not(#main header))
+:is(
+    :is([data-icon*="wordmark" i], [data-testid*="wordmark" i], [data-icon="whatsapp-logo"], [data-icon="wa-logo"], [aria-label="WhatsApp" i]) > svg,
+    :is(h1, a, span, div) > svg:is([data-icon*="wordmark" i], [data-icon="whatsapp-logo"], [data-icon="wa-logo"], [aria-label="WhatsApp" i])
+) {
+    display: none !important;
+}
+
+/* Use inset lines so the rails and chat columns keep their widths. */
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(nav, [role="navigation"], #side, #main, #main > header, #main > footer) {
+    box-shadow: inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(nav, [role="navigation"], #main > header, #main > footer) {
+    background-color: var(--st-surface) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark #main > header {
+    box-shadow: inset 0 -2px var(--st-accent), inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark #main :is(
+    [data-testid="conversation-panel-background"], [data-asset-chat-background],
+    [data-asset-chat-background-dark], [class*="wallpaper" i], [class*="chat-background" i]
+) {
+    background: var(--st-bg) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    #side header, #side [role="search"], #side [role="searchbox"], #side input[type="text"]
+) {
+    background-color: var(--st-input) !important;
+    box-shadow: inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark #main footer :is([role="textbox"], [contenteditable="true"]) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    nav button, [role="navigation"] button, #main > header button, #main > footer button,
+    #side [role="tab"], #side [aria-pressed], #side [role="button"][aria-haspopup],
+    #side button[aria-haspopup], #pane-side [role="row"], #pane-side [role="listitem"],
+    #main .message-in .copyable-text, #main .message-out .copyable-text,
+    #main [data-testid="msg-container"], #main [data-testid*="quoted-message"],
+    #main [data-testid="quoted-msg"], #main blockquote
+) {
+    box-shadow: inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    #pane-side [role="row"], #pane-side [role="listitem"],
+    nav button, [role="navigation"] button, [role="menuitem"]
+):hover {
+    background-color: var(--st-surface) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    #side [aria-selected="true"], #side [aria-selected="true"] > div,
+    #side [aria-pressed="true"], #side [aria-current="true"],
+    nav [aria-current="page"], nav [aria-pressed="true"],
+    [role="navigation"] :is([aria-selected="true"], [aria-pressed="true"])
+) {
+    background-color: var(--st-selected) !important;
+    color: var(--st-accent) !important;
+    box-shadow: inset 2px 0 var(--st-accent), inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    #main [data-testid*="quoted-message"], #main [data-testid="quoted-msg"], #main blockquote
+) {
+    box-shadow: inset 2px 0 var(--st-accent), inset 0 0 0 1px var(--st-line) !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark #main :is(.message-in, .message-out) :is(video, img[src^="blob:"]) {
+    outline: 1px solid var(--st-line);
+    outline-offset: -1px;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :is(
+    [role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], [role="complementary"]
+) {
+    background-color: var(--st-surface) !important;
+    box-shadow: inset 0 0 0 1px var(--st-line), 0 4px 16px #0008 !important;
+}
+
+html[data-st-site="whatsapp"][data-st-preset="system24"] body.dark :focus-visible {
+    outline: 2px solid var(--st-accent) !important;
+    outline-offset: -2px;
+}
