@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <title>Site Themer</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h1><img src="../icons/icon-32.png" width="20" height="20" alt=""> Site Themer</h1>
-  <div id="sites"></div>
+  <header class="brand">
+    <img src="../icons/icon-32.png" width="32" height="32" alt="">
+    <h1>Site Themer</h1>
+  </header>
+  <nav id="sites" aria-label="Site settings" hidden></nav>
+  <main id="settings" hidden>
+    <div class="section-heading">
+      <h2>Theme</h2>
+      <label class="enabled"><input id="enabled" type="checkbox" role="switch" aria-label="Enable theme"> <span id="enabled-label" aria-hidden="true">On</span></label>
+    </div>
+    <div id="presets" role="radiogroup" aria-label="Theme preset"></div>
+    <details id="customize">
+      <summary>Customize</summary>
+      <div id="options"></div>
+    </details>
+  </main>
+  <p id="status" role="status" hidden></p>
   <script src="../shared/registry.js"></script>
   <script src="popup.js"></script>
 </body>

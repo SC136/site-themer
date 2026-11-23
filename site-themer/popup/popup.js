@@ -1,74 +1,154 @@
-const { PRESETS, SITES, loadSettings, saveSettings } = SiteThemer;
+const { PRESETS, SITES, siteForHost, loadSettings, saveSettings } = SiteThemer;
 
 function el(tag, props = {}, ...children) {
-  const e = Object.assign(document.createElement(tag), props);
-  e.append(...children);
-  return e;
+  const element = Object.assign(document.createElement(tag), props);
+  element.append(...children);
+  return element;
 }
 
-function optionRow(o, s, preset, update) {
-  if (o.type === "toggle") {
-    const box = el("input", { type: "checkbox", checked: !!s[o.key] });
-    box.onchange = () => update({ [o.key]: box.checked });
-    return el("div", { className: "row" }, o.label, box);
-  }
+const siteList = document.getElementById("sites");
+const themeList = document.getElementById("presets");
+const options = document.getElementById("options");
+const customize = document.getElementById("customize");
+const enabled = document.getElementById("enabled");
+const enabledLabel = document.getElementById("enabled-label");
+const status = document.getElementById("status");
 
-  if (o.type === "select") {
-    const sel = el("select");
-    for (const [v, label] of o.choices) sel.append(el("option", { value: v, textContent: label, selected: v === s[o.key] }));
-    sel.onchange = () => update({ [o.key]: sel.value });
-    return el("div", { className: "row" }, o.label, sel);
-  }
+let settings;
+let siteId;
+let pendingSave = Promise.resolve();
 
-  const current = s[o.key] || preset[o.slot || o.key] || o.fallback;
-  const color = el("input", { type: "color", value: current });
-  color.onchange = () => update({ [o.key]: color.value });
-  const reset = el("button", { textContent: "Reset" });
-  reset.onclick = () => update({ [o.key]: null });
-  return el("div", { className: "row" }, o.label, el("span", {}, color, " ", reset));
+function showError(message) {
+  status.textContent = message;
+  status.hidden = !message;
 }
 
-async function render() {
-  const settings = await loadSettings();
-  const container = document.getElementById("sites");
-  container.replaceChildren();
-
-  for (const id in SITES) {
-    const site = SITES[id];
-    const s = settings[id];
-    const update = async (patch) => {
-      Object.assign(s, patch);
-      await saveSettings(settings);
-      render();
-    };
-    const preset = PRESETS[s.preset] || PRESETS.amoled;
-
-    const toggle = el("input", { type: "checkbox", checked: s.enabled });
-    toggle.onchange = () => update({ enabled: toggle.checked });
-
-    const select = el("select");
-    for (const key in PRESETS) select.append(el("option", { value: key, textContent: PRESETS[key].name, selected: key === s.preset }));
-    select.onchange = () => {
-      const reset = { preset: select.value };
-      for (const o of site.options) if (o.type === "color" && o.slot) reset[o.key] = null;
-      update(reset);
-    };
-
-    const swatches = el("div", { className: "swatches" });
-    for (const k of ["bg", "surface", "border", "incoming", "outgoing"]) {
-      const custom = site.options.find((o) => o.slot === k && s[o.key]);
-      swatches.append(el("span", { style: `background:${custom ? s[custom.key] : preset[k]}` }));
+function update(patch) {
+  settings = { ...settings, [siteId]: { ...settings[siteId], ...patch } };
+  refresh();
+  const snapshot = settings;
+  pendingSave = pendingSave.then(async () => {
+    try {
+      await saveSettings(snapshot);
+      showError("");
+    } catch {
+      showError("Could not save settings. Try changing the setting again.");
     }
+  });
+}
 
-    container.append(
-      el("div", { className: "site" },
-        el("div", { className: "row" }, el("span", { className: "title", textContent: site.name }), toggle),
-        el("div", { className: "row" }, "Theme", select),
-        ...site.options.map((o) => optionRow(o, s, preset, update)),
-        swatches
-      )
-    );
+function optionRow(option) {
+  const { key, label, type } = option;
+  const name = "option-" + key;
+  const caption = el("label", { htmlFor: name, textContent: label });
+  if (type === "toggle") {
+    const input = el("input", { id: name, type: "checkbox" });
+    input.onchange = () => update({ [key]: input.checked });
+    return el("div", { className: "row" }, caption, input);
+  }
+  if (type === "select") {
+    const select = el("select", { id: name });
+    for (const [value, textContent] of option.choices) select.append(el("option", { value, textContent }));
+    select.onchange = () => update({ [key]: select.value });
+    return el("div", { className: "row" }, caption, select);
+  }
+
+  const color = el("input", { id: name, type: "color" });
+  color.onchange = () => update({ [key]: color.value });
+  const reset = el("button", { type: "button", className: "reset", textContent: "Reset" });
+  reset.setAttribute("aria-label", "Reset " + label.toLowerCase());
+  reset.onclick = () => update({ [key]: null });
+  return el("div", { className: "row" }, caption, el("span", { className: "color-controls" }, color, reset));
+}
+
+function setPreset(key) {
+  const patch = { preset: key };
+  for (const option of SITES[siteId].options) {
+    if (option.type === "color" && option.slot) patch[option.key] = null;
+  }
+  update(patch);
+}
+
+for (const [key, preset] of Object.entries(PRESETS)) {
+  const input = el("input", { type: "radio", name: "preset", value: key });
+  input.onchange = () => setPreset(key);
+  const palette = el("span", { className: "palette" }, el("span"), el("span"), el("span"));
+  palette.setAttribute("aria-hidden", "true");
+  const mark = el("span", { className: "selected-mark" });
+  mark.setAttribute("aria-hidden", "true");
+  themeList.append(el("label", { className: "preset" }, input, palette,
+    el("span", { className: "preset-name" }, preset.name, mark)));
+}
+
+for (const [key, site] of Object.entries(SITES)) {
+  const button = el("button", { type: "button", textContent: site.name });
+  button.dataset.site = key;
+  button.setAttribute("aria-controls", "settings");
+  button.onclick = () => selectSite(key);
+  siteList.append(button);
+}
+
+function refresh() {
+  const site = SITES[siteId];
+  const saved = settings[siteId];
+  const selected = Object.hasOwn(PRESETS, saved.preset) ? saved.preset : "amoled";
+  const preset = PRESETS[selected];
+  const colorOption = site.options.find((option) => option.type === "color" && !option.slot)
+    || site.options.find((option) => option.slot === "outgoing");
+  enabled.checked = saved.enabled;
+  enabledLabel.textContent = saved.enabled ? "On" : "Off";
+
+  for (const card of themeList.children) {
+    const input = card.querySelector("input");
+    input.checked = input.value === selected;
+    const colors = PRESETS[input.value];
+    const currentColor = input.checked && colorOption && saved[colorOption.key];
+    const accent = currentColor || colors[colorOption?.slot || colorOption?.key] || colorOption?.fallback || colors.outgoing;
+    const tiles = card.querySelector(".palette").children;
+    tiles[0].style.backgroundColor = colors.bg;
+    tiles[1].style.backgroundColor = colors.surface;
+    tiles[2].style.backgroundColor = accent;
+  }
+
+  for (const option of site.options) {
+    const control = document.getElementById("option-" + option.key);
+    if (option.type === "toggle") control.checked = saved[option.key];
+    else if (option.type === "select") control.value = saved[option.key];
+    else control.value = saved[option.key] || preset[option.slot || option.key] || option.fallback;
   }
 }
 
-render();
+function selectSite(id) {
+  if (id === siteId) return;
+  siteId = id;
+  for (const button of siteList.children) {
+    button.setAttribute("aria-pressed", String(button.dataset.site === id));
+  }
+  options.replaceChildren(...SITES[id].options.map(optionRow));
+  customize.open = false;
+  refresh();
+}
+
+async function activeSite() {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    return tab?.url ? siteForHost(new URL(tab.url).hostname) : null;
+  } catch {
+    return null;
+  }
+}
+
+async function initialize() {
+  try {
+    const [saved, active] = await Promise.all([loadSettings(), activeSite()]);
+    settings = saved;
+    selectSite(active || Object.keys(SITES)[0]);
+    enabled.onchange = () => update({ enabled: enabled.checked });
+    siteList.hidden = false;
+    document.getElementById("settings").hidden = false;
+  } catch {
+    showError("Could not load settings. Reopen the popup to try again.");
+  }
+}
+
+initialize();
