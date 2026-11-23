@@ -1,3 +1,5 @@
+import "./vendor/ui-sdk-segmented.js";
+
 // Keep in sync with PRESETS in site-themer/shared/registry.js
 const PRESETS = {
   amoled:   { name: "AMOLED Black", bg: "#000000", surface: "#080808", border: "#141414", input: "#0b0b0b", incoming: "#0f0f0f", outgoing: "#0b3d2e" },
@@ -23,53 +25,22 @@ function selectPreset(key) {
   for (const v of ["bg", "surface", "border", "input", "incoming", "outgoing"]) {
     preview.style.setProperty("--p-" + v, p[v]);
   }
-  tabs.querySelectorAll("button").forEach((button, index) => {
-    const selected = button.dataset.key === key;
-    button.setAttribute("aria-pressed", String(selected));
-    if (selected) {
-      tabs.style.setProperty("--preset-index", index);
-      tabs.style.setProperty("--preset-column", index % 2);
-      tabs.style.setProperty("--preset-row", Math.floor(index / 2));
-    }
-  });
 }
 
-for (const key of ["system24", "amoled", "midnight", "graphite"]) {
-  const preset = PRESETS[key];
-  const b = document.createElement("button");
-  b.type = "button";
-  b.textContent = preset.name;
-  b.dataset.key = key;
-  b.style.setProperty("--swatch-bg", preset.bg);
-  b.style.setProperty("--swatch-accent", preset.outgoing);
-  b.setAttribute("aria-controls", "preview");
-  b.onclick = () => {
-    if (preview.dataset.preset === key) return;
-    selectPreset(key);
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      preview.getAnimations().forEach((animation) => {
-        if (animation.id === "preset-reveal") animation.cancel();
-      });
-      preview.animate(
-        [{ clipPath: "inset(0 0 18% 0)", opacity: .65 }, { clipPath: "inset(0)", opacity: 1 }],
-        { id: "preset-reveal", duration: 300, easing: "cubic-bezier(.22, 1, .36, 1)" }
-      );
-    }
-  };
-  tabs.append(b);
+for (const item of tabs.querySelectorAll("ui-segmented-control-item")) {
+  const preset = PRESETS[item.getAttribute("value")];
+  item.style.setProperty("--swatch-bg", preset.bg);
+  item.style.setProperty("--swatch-accent", preset.outgoing);
+  item.setAttribute("aria-controls", "preview");
 }
 selectPreset("system24");
+tabs.addEventListener("valuechange", () => queueMicrotask(() => selectPreset(tabs.value)));
 
-const siteButtons = document.querySelectorAll(".preview-sites button");
-for (const button of siteButtons) {
-  button.onclick = () => {
-    for (const option of siteButtons) {
-      const selected = option === button;
-      option.setAttribute("aria-pressed", String(selected));
-      document.getElementById(option.getAttribute("aria-controls")).hidden = !selected;
-    }
-  };
-}
+const sitePicker = document.getElementById("preview-sites");
+sitePicker.addEventListener("valuechange", () => queueMicrotask(() => {
+  document.getElementById("preview-whatsapp").hidden = sitePicker.value !== "whatsapp";
+  document.getElementById("preview-youtube").hidden = sitePicker.value !== "youtube";
+}));
 
 // Browser picker and clipboard fallback for internal extensions URLs.
 const browsers = { Chrome: "chrome://extensions", Edge: "edge://extensions", Brave: "brave://extensions" };
