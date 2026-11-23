@@ -97,3 +97,32 @@ appearance.onclick = () => {
   setAppearance(dark);
   try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
 };
+
+const creditPhrases = [
+  "Orchestrated by", "Prompted by", "Commanded by", "Spawned by", "Engineered by",
+  "Dispatched by", "Steered by", "Conjured by", "Manifested by", "Cooked by",
+];
+const credit = creditPhrases[Math.floor(Math.random() * creditPhrases.length)];
+document.getElementById("credit-prefix").textContent = credit;
+if (credit === "Prompted by") document.getElementById("credit-middle").textContent = ", shipped by his";
+
+const agents = document.querySelector(".credit-agents");
+const agentLabel = agents.textContent;
+const glyphs = "01#@*&%$§∆λΨ⌘~_/<>{}=+";
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+function animateAgents() {
+  if (reducedMotion.matches || agents.classList.contains("is-glitching")) return;
+  agents.classList.add("is-glitching");
+  const start = performance.now();
+  function frame(now) {
+    const progress = (now - start) / 450;
+    agents.textContent = [...agentLabel].map((letter, index) =>
+      progress >= (index + 1) / agentLabel.length ? letter : glyphs[Math.floor(Math.random() * glyphs.length)]
+    ).join("");
+    if (progress < 1) requestAnimationFrame(frame);
+    else agents.classList.remove("is-glitching");
+  }
+  requestAnimationFrame(frame);
+}
+agents.addEventListener("pointerenter", animateAgents);
+agents.addEventListener("click", animateAgents);
