@@ -8,7 +8,11 @@ Custom themes for websites. Currently supports **WhatsApp Web** and **YouTube**.
 - WhatsApp options: sent/received bubble colors, message text size, privacy blur (hover to reveal)
 - YouTube options: progress bar color, turn off ambient glow, dim thumbnails until hover
 
-## Install (Chrome, Edge, Brave)
+## Install for Edge
+
+Open [Site Themer on Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/site-themer/mjhmgldpnfndcilfkoomijbobnkmhpfo) and click **Get**.
+
+## Install manually (Chrome, Edge, Brave)
 
 1. Open `chrome://extensions` and enable **Developer mode**.
 2. **Load unpacked** and select this folder.
